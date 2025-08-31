@@ -1,0 +1,71 @@
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-brand: "#424242";
+    --color-brand-light: #797979;
+    --color-brand-dark: #000000;
+    --color-accent: #009051;
+    --color-accent-light: #0096FF;
+    --color-accent-dark: #941100;
+    --font-poppins: 'Poppins', 'ui-sans-serif', 'system-ui';
+    --shadow-bubble: 0 8px 20px rgba(0,0,0,0.15);
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --spacing-18: 4.5rem;
+    --spacing-22: 5.5rem;
+}
+
+@layer base{
+    body {
+        @apply font-sans h-dvh;
+    }
+    h2, h3 {
+        @apply text-brand-light; 
+    }
+    h1 {
+        @apply text-xl sm:text-2xl text-brand;
+    }
+    h2 {
+        @apply text-lg/loose sm:text-xl/loose font-semibold mb-2;
+    }
+    h3 {
+        @apply text-sm/loose font-semibold;
+    }
+    p {
+        @apply text-sm/loose text-brand-dark;
+    }
+
+    a{
+        @apply relative z-20;
+    }
+
+    a[aria-current="true"]{
+        @apply scale-110 text-brand-light;
+    }
+
+    a[aria-current="page"]{
+        @apply scale-110 text-brand-light;
+    }
+
+    button{
+        @apply relative z-20;
+    }
+
+    main {
+        @apply scroll-smooth [-webkit-overflow-scrolling:touch];
+    }
+}
+
+@layer components {
+    .bubble-node {
+        @apply w-32 h-32 flex items-center justify-center rounded-full shadow-bubble cursor-pointer transition transform hover:scale-110;
+    }
+
+    .btn-cta {
+        @apply font-semibold rounded-full border border-accent-dark hover:text-white hover:bg-accent hover:border-transparent active:bg-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition;
+    }
+
+    .link-nav {
+        @apply no-underline text-brand text-sm font-medium hover:scale-110 hover:text-brand-light focus:scale-110 focus:text-brand-light active:scale-110 active:text-brand-light;
+    }
+}
