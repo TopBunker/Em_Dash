@@ -8,12 +8,18 @@ use Illuminate\View\Component;
 
 class Background extends Component
 {
+
+    public $summary = '';
+    public $educations = [];
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($params)
     {
-        //
+
+        $this->summary = $params['summary'];
+        $this->educations = $params['educations'];
     }
 
     /**

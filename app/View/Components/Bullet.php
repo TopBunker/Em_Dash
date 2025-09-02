@@ -1,21 +1,23 @@
 <?php
 
-namespace App\View\Components\Resume;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class References extends Component
+class Bullet extends Component
 {
-     public $params = [];
+    public int $type;
+    public string $item;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($params)
+    public function __construct(int $type, string $item)
     {
-        $this->params=$params;
+        $this->type = $type;
+        $this->item = $item;
     }
 
     /**
@@ -23,6 +25,6 @@ class References extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.resume.references');
+        return view('components.bullet');
     }
 }

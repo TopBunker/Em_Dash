@@ -10,13 +10,12 @@
         <!-- Styles and Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-poppins antialiased h-dvh">
+    <body class="font-poppins antialiased max-h-dvh">
         <!-- Background Pixi Canvas-->
         <div id="canvas" class="fixed inset-0 -z-10"></div>
 
         <!--Page Wrapper-->
-        <div class="fixed inset-0 h-dvh bg-transparent">
-            {{$slot}}
-        </div>
+        {{$slot}}
+        
     </body>
 </html>

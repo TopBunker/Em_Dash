@@ -1,4 +1,4 @@
-<div class="relative z-10 flex flex-col justify-between items-center px-4 pt-4 max-w-6xl mx-auto">
+<div class="relative flex flex-col justify-between items-center px-4 pt-4 @max-w-6xl @mx-auto">
     <!--Resume Heading-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
@@ -6,16 +6,16 @@
             class="img-fluid w-24 h-24 border-2 border-gray-300 shadow- rounded-full aspect-square object-cover" 
             alt="User profile picture">
         </div>
-        <div class="flex flex-col justify-around text-center ml-2 sm:mx-3 sm:ml-auto">
-            <h1 class="text-2xl sm:text-3xl font-medium">{{$fName}} {{$lName}}</h1>
-            <h2 class="text-xl sm:text-2xl font-normal">{{$title}}</h2>
+        <div class="flex flex-col justify-around text-center ml-2 @sm:mx-3 @sm:ml-auto">
+            <h1 class="text-2xl @sm:text-3xl font-medium">{{$fName}} {{$lName}}</h1>
+            <h2 class="text-xl @sm:text-2xl font-normal">{{$title}}</h2>
         </div>
     </div>
     <!--Contact Details-->
     <div class="flex flex-col justify-around my-2">
         <!--Mobile Chevron Button-->
         <button id="contact-toggle" 
-            class="hover:text-accent-light transition mx-auto md:hidden"
+            class="hover:text-accent-light transition mx-auto @min-[49rem]:hidden"
             @click="showContact = !showContact"
             :aria-expanded="open.toString()" aria-label="Toggle contact display for mobile">
             <svg id="chevron" width="16" height="16" fill="currentColor" 
@@ -26,8 +26,8 @@
         </button>
             <!--Details-->
         <div id="contact-details" 
-            class="flex flex-col justify-around md:flex-row md:space-x-8 text-center max-h-40 opacity-100 transition-all duration-300 ease-in-out" 
-            :class="showContact ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 hidden'">
+            class="flex flex-col justify-around @min-[49rem]:flex-row @min-[49rem]:space-x-8 text-center @max-h-40 opacity-100 transition-all duration-300 ease-in-out" 
+            :class="showContact ? '@max-h-40 opacity-100' : '@max-md:@max-h-0 @max-md:opacity-0 @max-md:hidden'">
             <p class="text-brand-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
@@ -50,7 +50,7 @@
     </div>
 
     <!--Desktop Nav-->
-    <nav class="hidden md:flex flex-row justify-between items-center space-x-2 border-t border-accent-dark py-2 w-full">
+    <nav class="hidden @md:flex flex-row justify-between items-center space-x-2 border-t border-accent-dark py-2 w-full">
         <div class="flex flex-row items-center space-x-4">
             <a href="#" class="link-nav" :aria-current="view === 'classic' ? 'page' : null" wire:click="$dispatch('switchTo', {active: 'classic'})" aria-label="View Classic">
                 Classic

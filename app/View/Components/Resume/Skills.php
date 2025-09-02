@@ -8,12 +8,22 @@ use Illuminate\View\Component;
 
 class Skills extends Component
 {
+     public $skills = [];
+     public $categories = [];
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($params)
     {
-        //
+        $skills = [];
+        foreach ($params as $key => $item) {
+            if (!in_array($key, $this->categories)) {
+                $this->categories[] = $key; 
+            }
+            $skills[$key][] = $item['description'];
+        }
+        $this->skills = $skills;
     }
 
     /**

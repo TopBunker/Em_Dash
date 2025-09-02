@@ -8,12 +8,17 @@ use Illuminate\View\Component;
 
 class Experience extends Component
 {
+     public $experiences = [];
+     public $headings = [];
+
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($params = [])
     {
-        //
+        $this->headings =$params['headings'];
+        $this->experiences = $params['experiences'];
     }
 
     /**

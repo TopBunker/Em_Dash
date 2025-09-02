@@ -16,9 +16,6 @@
 }
 
 @layer base{
-    body {
-        @apply font-sans h-dvh;
-    }
     h2, h3 {
         @apply text-brand-light; 
     }
@@ -51,9 +48,6 @@
         @apply relative z-20;
     }
 
-    main {
-        @apply scroll-smooth [-webkit-overflow-scrolling:touch];
-    }
 }
 
 @layer components {
@@ -67,5 +61,12 @@
 
     .link-nav {
         @apply no-underline text-brand text-sm font-medium hover:scale-110 hover:text-brand-light focus:scale-110 focus:text-brand-light active:scale-110 active:text-brand-light;
+    }
+    .section-nav{
+        @apply no-underline text-brand text-sm font-medium hover:scale-110 hover:text-brand-light hover:underline focus:scale-110 focus:text-brand-light focus:underline active:scale-110 active:text-brand-light active:underline;
+    }
+
+    .overflow-y-auto{
+        @apply scroll-smooth [-webkit-overflow-scrolling:touch];
     }
 }
