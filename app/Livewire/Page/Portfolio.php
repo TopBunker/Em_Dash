@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Page;
 
 use App\Services\ResumeService;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
-class Bubble extends Component
+class Portfolio extends Component
 {
-     public $state = [];
+    public $state = [];
 
     public function mount(string $userId): void {
         $resume = ResumeService::show($userId);
@@ -18,10 +18,9 @@ class Bubble extends Component
         $this->state['resume/references'] = Arr::from($resume['references']);
         $this->state['resume/skills'] = Arr::from($resume['skills']);
     }
-
-
+    
     public function render()
     {
-        return view('livewire.pages.bubble',[...$this->state]);
+        return view('livewire.page.portfolio');
     }
 }

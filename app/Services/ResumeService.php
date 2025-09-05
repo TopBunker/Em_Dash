@@ -73,10 +73,9 @@ class ResumeService
     * Assemble user resume for render.
     */
     public static function show(string $id = ''): array {
+        $user_id = $id;
         if($id === ''){
             $user_id = User::first()->id;
-        }{
-            $user_id = $id;
         }
         
         $resId = Resume::where('user_id', $user_id)->value('id');

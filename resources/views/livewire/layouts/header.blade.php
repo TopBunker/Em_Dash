@@ -1,5 +1,5 @@
 <div class="relative flex flex-col justify-between items-center px-4 pt-4 @max-w-6xl @mx-auto">
-    <!--Resume Heading-->
+    <!--Default Profile Header-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
             <img src="{{ asset('storage/images/'.$image )}}" 
@@ -16,18 +16,18 @@
         <!--Mobile Chevron Button-->
         <button id="contact-toggle" 
             class="hover:text-accent-light transition mx-auto @min-[49rem]:hidden"
-            @click="showContact = !showContact"
-            :aria-expanded="open.toString()" aria-label="Toggle contact display for mobile">
+            x-on:click="reveal = !reveal"
+            :aria-expanded="reveal.toString()" aria-label="Toggle contact display for mobile">
             <svg id="chevron" width="16" height="16" fill="currentColor" 
                 class="w-4 h-4 transition-transform duration-500" viewBox="0 0 16 16"
-                :class="showContact ? 'rotate-180' : 'rotate-0'">
+                :class="reveal ? 'rotate-180' : 'rotate-0'">
                 <path stroke="black" stroke-width="2" fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
             </svg>
         </button>
             <!--Details-->
         <div id="contact-details" 
             class="flex flex-col justify-around @min-[49rem]:flex-row @min-[49rem]:space-x-8 text-center @max-h-40 opacity-100 transition-all duration-300 ease-in-out" 
-            :class="showContact ? '@max-h-40 opacity-100' : '@max-md:@max-h-0 @max-md:opacity-0 @max-md:hidden'">
+            :class="reveal ? '@max-h-40 opacity-100' : '@max-md:@max-h-0 @max-md:opacity-0 @max-md:hidden'">
             <p class="text-brand-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
@@ -47,22 +47,21 @@
                 {{$contact['email']}} 
             </p>
         </div>
-    </div>
+</div>
 
-    <!--Desktop Nav-->
-    <nav class="hidden @md:flex flex-row justify-between items-center space-x-2 border-t border-accent-dark py-2 w-full">
+    <!--Desktop nav-->
+    <div  class="hidden @md:flex flex-row justify-between items-center space-x-2 border-t border-accent-dark py-2 w-full">
         <div class="flex flex-row items-center space-x-4">
-            <a href="#" class="link-nav" :aria-current="view === 'classic' ? 'page' : null" wire:click="$dispatch('switchTo', {active: 'classic'})" aria-label="View Classic">
-                Classic
+            <a href="#" class="link-nav" x-bind:aria-current="currentPage === 'resume' ? 'page' : null" x-on:click="currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
+                Resume
             </a>
             <span>|</span>
-            <a href="#" class="link-nav" :aria-current="view === 'bubble' ? 'page' : null" wire:click="$dispatch('switchTo', {active: 'bubble'})" aria-label="View Classic">
-                Bubble
+            <a href="#" class="link-nav" x-bind:aria-current="currentPage === 'portfolio' ? 'page' : null" x-on:click="currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
+                Portfolio
             </a>
         </div>
-        <!--Contact button (always visible)-->
-        <button class="text-accent-dark px-3 btn-cta" :aria-current="view === 'contact' ? 'page' : null" wire:click="$dispatch('switchTo', {active: 'contact'})" aria-label="Contact">
+        <a href="#" class="text-accent-dark px-3 btn-cta" x-bind:aria-current="currentPage === 'contact' ? 'page' : null" x-on:click="currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
             Contact
-        </button>
-    </nav>
+        </a>
+    </div>
 </div>

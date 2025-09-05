@@ -69,4 +69,8 @@
     .overflow-y-auto{
         @apply scroll-smooth [-webkit-overflow-scrolling:touch];
     }
+
+    .sub-nav{
+        @apply @md:fixed @md:top-[60dvh] @md:right-2 @md:overflow-y-auto;
+    }
 }

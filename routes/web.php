@@ -1,7 +1,8 @@
 <?php
 
-use App\Livewire\Welcome;
+use App\Livewire\Contact;
+use App\Livewire\Profile;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', Welcome::class);
+Route::get('/', Profile::class);
