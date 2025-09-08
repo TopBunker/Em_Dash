@@ -9,6 +9,8 @@ use Livewire\Component;
 class Portfolio extends Component
 {
     public $state = [];
+    public $hasSettings = false;
+
 
     public function mount(string $userId): void {
         $resume = ResumeService::show($userId);

@@ -2,13 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Layouts\Footer;
 use App\Models\User;
 use Livewire\Attributes\{Layout, Locked, On};
 use Livewire\Component;
 
 #[Layout('components.layouts.guest')]
-class Profile extends Component
+class Paginator extends Component
 {
     #[Locked]
     private $user;
@@ -50,6 +49,6 @@ class Profile extends Component
 
     public function render()
     {
-        return view('livewire.profile', ['userId' => $this->userId]);
+        return view('livewire.paginator', ['userId' => $this->userId]);
     }
 }

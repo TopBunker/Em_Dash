@@ -1,8 +1,7 @@
 <?php
 
-use App\Livewire\Contact;
-use App\Livewire\Profile;
+use App\Livewire\Paginator;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', Profile::class);
+Route::get('/', Paginator::class);

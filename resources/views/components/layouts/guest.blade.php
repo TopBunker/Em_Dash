@@ -15,18 +15,8 @@
         <div id="canvas" class="fixed inset-0 -z-10"></div>
 
         <!--Page Wrapper-->
-        <div id="profile" x-data="{currentPage: 'resume', reveal: true, close(){this.reveal = false}, open(){this.reveal = true}}" @open="open()" @close="close()" class="@container relative inset-0 h-dvh bg-transparent px-2">
-            <!--Header-->
-            <header class="fixed z-10 top-0 left-0 right-0 bg-white/30 backdrop-blur-md shadow-md border-b border-accent-dark">
-                @yield('header')
-            </header>
-
+        <div class="@container relative inset-0 h-dvh bg-transparent">
             {{$slot}}
-
-            <!--Footer-->
-            <footer class="fixed z-10 bottom-0 left-0 right-0">
-                <livewire:layouts.footer />
-            </footer>
         </div>     
     </body>
 </html>

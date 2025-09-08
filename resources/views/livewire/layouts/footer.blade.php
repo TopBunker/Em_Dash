@@ -1,12 +1,12 @@
-<div x-data="{menuOpen: false}" class="relative flex flex-col px-4 bg-accent backdrop-blur-md">
+<div x-data="{menuOpen: false}" class="relative flex flex-col px-4 backdrop-blur-md">
     <!-- Mobile Nav-->
     <div  class="@md:hidden flex flex-col py-2">
         <div id="mobile-menu" class="flex flex-col pb-2 origin-bottom" 
             x-show="menuOpen" x-transition>
-            <a href="#" class="px-4 py-2 link-nav" x-bind:aria-current="currentPage === 'resume' ? 'page' : null" x-on:click.prevent="currentPage='resume';$dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
+            <a href="#" class="px-4 py-2 link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
                 Resume
             </a>
-            <a href="#" class="px-4 pt-2 link-nav" x-bind:aria-current="currentPage === 'portfolio' ? 'page' : null" x-on:click.prevent="currentPage='portfolio';$dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
+            <a href="#" class="px-4 pt-2 link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
                 Portfolio
             </a>
         </div>
@@ -21,7 +21,7 @@
                 </svg>
             </button>
             <!--Contact button-->
-            <a href="#" class="text-accent-dark px-3 py-1 btn-cta" x-bind:aria-current="currentPage === 'contact' ? 'page' : null" x-on:click.prevent="currentPage='contact';$dispatch('switchTo', {active: 'contact'})" aria-label="View Contact">
+            <a href="#" class="text-accent-dark px-3 py-1 btn-cta" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='contact'; $dispatch('switchTo', {active: 'contact'})" aria-label="View Contact">
                 Contact
             </a>
         </div>

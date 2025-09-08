@@ -1,4 +1,4 @@
-<div class="relative flex flex-col justify-between items-center px-4 pt-4 @max-w-6xl @mx-auto">
+<div x-data class="relative flex flex-col justify-between items-center px-4 pt-4 @max-w-6xl @mx-auto">
     <!--Default Profile Header-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
@@ -13,21 +13,21 @@
     </div>
     <!--Contact Details-->
     <div class="flex flex-col justify-around my-2">
-        <!--Mobile Chevron Button-->
+        <!--Chevron Button-->
         <button id="contact-toggle" 
             class="hover:text-accent-light transition mx-auto @min-[49rem]:hidden"
-            x-on:click="reveal = !reveal"
-            :aria-expanded="reveal.toString()" aria-label="Toggle contact display for mobile">
+            x-on:click="$store.app.toggleInfo()"
+            :aria-expanded="$store.app.showInfo.toString()" aria-label="Toggle contact display for mobile">
             <svg id="chevron" width="16" height="16" fill="currentColor" 
                 class="w-4 h-4 transition-transform duration-500" viewBox="0 0 16 16"
-                :class="reveal ? 'rotate-180' : 'rotate-0'">
+                :class="$store.app.showInfo ? 'rotate-180' : 'rotate-0'">
                 <path stroke="black" stroke-width="2" fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
             </svg>
         </button>
-            <!--Details-->
+            <!--Details/Links-->
         <div id="contact-details" 
             class="flex flex-col justify-around @min-[49rem]:flex-row @min-[49rem]:space-x-8 text-center @max-h-40 opacity-100 transition-all duration-300 ease-in-out" 
-            :class="reveal ? '@max-h-40 opacity-100' : '@max-md:@max-h-0 @max-md:opacity-0 @max-md:hidden'">
+            :class="$store.app.showInfo ? '@max-h-40 opacity-100' : '@max-md:@max-h-0 @max-md:opacity-0 @max-md:hidden'">
             <p class="text-brand-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
@@ -47,20 +47,20 @@
                 {{$contact['email']}} 
             </p>
         </div>
-</div>
+    </div>
 
     <!--Desktop nav-->
     <div  class="hidden @md:flex flex-row justify-between items-center space-x-2 border-t border-accent-dark py-2 w-full">
         <div class="flex flex-row items-center space-x-4">
-            <a href="#" class="link-nav" x-bind:aria-current="currentPage === 'resume' ? 'page' : null" x-on:click="currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
+            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click="$store.app.currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
                 Resume
             </a>
             <span>|</span>
-            <a href="#" class="link-nav" x-bind:aria-current="currentPage === 'portfolio' ? 'page' : null" x-on:click="currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
+            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click="$store.app.currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
                 Portfolio
             </a>
         </div>
-        <a href="#" class="text-accent-dark px-3 btn-cta" x-bind:aria-current="currentPage === 'contact' ? 'page' : null" x-on:click="currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
+        <a href="#" class="text-accent-dark px-3 btn-cta" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click="$store.app.currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
             Contact
         </a>
     </div>

@@ -12,6 +12,7 @@ class Resume extends Component
     public $portfolio = [];
     public $skills = [];
     public $references = [];
+    public $hasSettings = true;
 
     public function mount(string $userId): void {
         $resume = ResumeService::show($userId);
