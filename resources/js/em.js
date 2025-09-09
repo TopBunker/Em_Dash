@@ -1,20 +1,14 @@
 // Global Listeners
 document.addEventListener('alpine:init', () => {
-    // Global js Data
+    // global js app Data
     Alpine.store('app', {
         currentPage: null,
         showInfo: true,
         toggleInfo(){
             this.showInfo = !this.showInfo
         },
-        appSettings: [],
-        runSettings(){
-            this.appSettings.forEach(setting => setting());
-        },
-        clearSettings(){
-            this.appSettings = [];
-        }
     });
+    // page utility data
     Alpine.store('page',{
         observer: new IntersectionObserver((items) => {
             //scrollspy
@@ -50,6 +44,13 @@ document.addEventListener('alpine:init', () => {
                     }
                 });
             }
+        },
+        pageSettings: [],
+        runSettings(){
+            this.pageSettings.forEach(setting => setting());
+        },
+        clearSettings(){
+            this.pageSettings = [];
         }
     });
 });
@@ -76,8 +77,9 @@ document.addEventListener('livewire:initialized', () => {
     },{passive: true});
     window.addEventListener('pointerup', () => {dragging=false});
 
+    // update local storage on navigation
     document.addEventListener('switchTo', (e) => {
-        console.log(e);
+        localStorage.setItem('active', e.detail.active);
     });
 });
 

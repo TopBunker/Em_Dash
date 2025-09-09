@@ -17,9 +17,9 @@ class Experience extends Component
      */
     public function __construct($params = [])
     {
-        $this->headings =$params['headings'];
+        $this->headings = $params['headings'];
         $this->experiences = $params['experiences'];
-    }
+    } 
 
     /**
      * Get the view / contents that represent the component.

@@ -18,10 +18,11 @@ class Skills extends Component
     {
         $skills = [];
         foreach ($params as $key => $item) {
-            if (!in_array($key, $this->categories)) {
-                $this->categories[] = $key; 
+            $cat = $item['category'];
+            if (!in_array($cat, $this->categories)) {
+                $this->categories[] = $cat; 
             }
-            $skills[$key][] = $item['description'];
+            $skills[$cat][] = $item['description'];
         }
         $this->skills = $skills;
     }

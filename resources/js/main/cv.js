@@ -24,7 +24,7 @@ $(async () =>
 
     await app.init({
         backgroundAlpha: 1, 
-        backgroundColor:'pink',
+        backgroundColor:'#fce7f3',
         powerPreference: "high-performance",
         width: window.innerWidth,
         height: window.innerHeight,
@@ -35,26 +35,15 @@ $(async () =>
         imageSmoothingEnabled: true,
         imageSmoothingQuality: "high"
     }); 
-
+    // add canvas to dom
     canDiv.appendChild(app.canvas);
 
-    
 
-    //add containers to canvas
+    // add containers to canvas
     app.stage.addChild(main);
 
-    //console.log(contact.style);
-    //const cntctNode = new Node(['cMeet','cProject','cConnect'], contact.offsetLeft+(contact.offsetWidth/2), contact.offsetTop+(contact.offsetHeight/2), (contact.offsetWidth/2)+(contact.offsetWidth/4),  'blue');
-    //main.addChild(cntctNode.node);
-
-    /**const abt = new Node('About Me',['this is the data contained in the node'], [], window.innerWidth/2, window.innerHeight/2, window.innerWidth/3, "#7FFF00");
-     main.addChild(abt.node);
-
-    const port = new Node('Portfolio',['this is the data contained in the node'], [], window.innerWidth/3, window.innerHeight/1.3, window.innerWidth/3, "#7FFF00");
-    main.addChild(port.node);*/
-
-    //initialise Pixijs ticker
-    app.ticker.add((delta)=>{update(delta)});
+  
+    //app.ticker.add((delta)=>{update(delta)});
 
 });
 

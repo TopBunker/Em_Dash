@@ -76,7 +76,7 @@ class ResumeService
         $user_id = $id;
         if($id === ''){
             $user_id = User::first()->id;
-        }
+        }   
         
         $resId = Resume::where('user_id', $user_id)->value('id');
 
@@ -120,7 +120,7 @@ class ResumeService
             }
             $experience['experiences'][] = ResumeService::scrubId($exp,['id','code']);
         }
-        $experience['headings'] = array_unique(array_merge($theads, $aheads));
+        $experience['headings'] = array_filter(array_unique(array_merge($theads, $aheads)));
 
         $collection = Portfolio::select('id','title','description','file_name','link')
                     ->where('resume_id', $resId)

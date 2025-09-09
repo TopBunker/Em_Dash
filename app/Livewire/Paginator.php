@@ -27,6 +27,7 @@ class Paginator extends Component
         if($id === 'main'){
             $this->user = User::first();
         }
+        
         $this->userId = $this->user->id;
         
         $this->setComponent('resume');

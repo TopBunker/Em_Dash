@@ -24,6 +24,27 @@ class Resume extends Component
         }
     }
 
+    /**
+     * Check for value in array recursively
+     * @param mixed $value 
+     * @param mixed $array 
+     * @return true|false 
+     */
+    public function hasValue(string $value, array $array): bool {
+        if(!empty($array)){
+            foreach ($array as $key => $item) {
+                if(is_array($item)){
+                    if($this->hasValue($value, $item)){
+                        return true;
+                    }
+                }elseif($item === $value){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public function render()
     {
         return view('livewire.page.resume', ['background' => $this->background, 'experience' => $this->experience, 'portfolio' => $this->portfolio, 'skills' => $this->skills, 'references' => $this->references]);

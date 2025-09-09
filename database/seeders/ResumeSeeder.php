@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Resume;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ResumeSeeder extends Seeder

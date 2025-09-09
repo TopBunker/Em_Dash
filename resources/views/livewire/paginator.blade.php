@@ -5,7 +5,7 @@
     </header>
     <!--Main-->
     <main class="relative flex flex-col md:flex-row overflow-y-auto">
-        <div class="basis-1/3"></div>
+        <div id="left-col" class="basis-1/6"></div>
             <!-- Show loading spinner first time a component is loaded -->
             @if (!in_array($activeComponent, $loadedComponents))
             <div class="fixed z-50 h-dvh w-dvw text-center">
@@ -17,12 +17,12 @@
                 </div>
             </div>
             @else
-            <div class="relative flex pb-40">
+            <div class="relative basis-auto"> 
             <!-- Dynamically load view Livewire child component-->
             <livewire:dynamic-component :is="$activeComponent" :key="$activeComponent" :$userId/>
             </div>
             @endif
-        <div class="basis-3/5"></div>
+        <div id="right-col" class="basis-2/5"></div>
     </main>
     <!--Footer-->
     <footer class="fixed z-10 bottom-0 left-0 right-0">
@@ -47,7 +47,7 @@
             Alpine.store('app').currentPage = active;
             // get settings like sections navs, if any
             if(c.component.$wire.hasSettings){
-                Alpine.store('app').appSettings.push(settings[active]);
+                Alpine.store('page').pageSettings.push(settings[active]);
             }
         }
 
@@ -55,13 +55,13 @@
 
       document.addEventListener('livewire:initialized', () => {
         // run settings when dom is ready
-        Alpine.store('app').runSettings();
+        Alpine.store('page').runSettings();
 
       });
 
       Livewire.hook('morphed', (c) => {
         // run settings when on each morph
-        Alpine.store('app').runSettings();
+        Alpine.store('page').runSettings();
       });
         
 

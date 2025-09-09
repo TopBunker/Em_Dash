@@ -17,7 +17,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'heading' => $this->faker->optional(0.5)->words(5,true),
+            'heading' => $this->faker->optional(0.5)->randomElement(['title 1', 'title a', 'this is also a title', 'chocolate thunder']),
             'task' => $this->faker->sentence()
         ];
     }

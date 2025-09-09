@@ -1,8 +1,9 @@
-<div x-data id="resume" class="relative flex flex-col">
+<div x-data id="resume" class="relative flex flex-col justify-between gap-y-24 pb-40 px-4 pt-4">
         <!-- Background Section-->
-        <section data-section="background">
+        <section data-section="background" class="">
                 <x-resume.background :params="$background" />
         </section>
+
         <!-- Experience Section -->
         <section data-section="experience">
                 <x-resume.experience :params="$experience" />
@@ -19,7 +20,7 @@
         </section> 
         @endif
 
-        <nav id="resumeNav" x-data="{section: 'background'}" class="@md:fixed @md:bottom-5 @md:right-12 @md:top-52 md:w-auto bg-white/30 backdrop-blur-md max-md:border-t border-accent flex md:flex-col overflow-x-auto no-scrollbar space-x-6 md:space-x-0 md:space-y-4 px-4 max-md:py-2 py-12">
+        <nav id="resumeNav" x-data="{section: 'background'}" class="flex flex-row flex-nowrap justify-around md:flex-col md:fixed md:bottom-5 md:right-5 md:top-72 lg:top-52 md:w-auto lg:overflow-y-auto bg-white/30 backdrop-blur-md max-md:border-t border-accent-dark space-x-6 md:space-x-0 md:space-y-4 px-4 max-md:py-2">
                 <a href="#background" x-bind:aria-current="section === 'background' ? 'true' : null" x-on:click="section='background'; $store.page.scrollTo('background')" class="shrink-0 section-nav">Background</a>
                 <a href="#experience" x-bind:aria-current="section === 'experience' ? 'true' : null" x-on:click="section='experience'; $store.page.scrollTo('experience')" class="shrink-0 section-nav">Experience</a>
                 <a href="#skills" x-bind:aria-current="section === 'skills' ? 'true' : null" x-on:click="section='skills'; $store.page.scrollTo('skills')" class="shrink-0 section-nav">Skills</a>
