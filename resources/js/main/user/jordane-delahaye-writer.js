@@ -117,9 +117,6 @@ document.addEventListener('portfolio:ready', () => {
         }
     });
 
-
-    //document.addEventListener('portfolio:off', () => Alpine.store('app').listeners.remove(scrollable, 'scroll', scroller), {once: true});
-
     document.addEventListener('portfolio.closing', destroyer);
     document.addEventListener('portfolio:off', destroyer);
 
