@@ -27,7 +27,7 @@ class Header extends Component
         if(isset($user)){
             $this->lName = $user->last_name;
             $this->fName = $user->first_name;
-            $mail = $user->email;
+            $mail = preg_split('/@|\.(?=[^.]+$)/', $user->email, 3);
             $contact = array('email'=>$mail);
 
             if(Schema::hasTable('resumes')){
@@ -41,11 +41,11 @@ class Header extends Component
                 $this->title = $resume->title;
 
                 if(Schema::hasTable('images') && $resume->hasImage){
-                    $fileName = Image::where('resume_id',$resume->id)->value('file_name');
-                    $this->image = 'user/'.$fileName;
+                    $fileName = Image::where('resume_id',$resume->id)->value('file_location');
+                    $this->image = $fileName;
                 }
 
-                $contact['tel'] = $resume->tel;
+                $contact['tel'] = preg_split('/\s+/', $resume->tel);
                 $contact['address'] = $resume->personalAddress;
                 $this->contact = $contact;
             }else{

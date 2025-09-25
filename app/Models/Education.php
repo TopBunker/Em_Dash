@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,5 +33,13 @@ class Education extends Model
 
     public function institutionAddress(): MorphOne {
         return $this->morphOne(Address::class, 'addressable');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'date: F Y',
+            'end_date' => 'date: F Y'
+        ];
     }
 }

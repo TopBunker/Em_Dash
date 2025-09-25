@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('resume_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('category'); //technical skill, organizational skill, interpersonal skill, language, other, etc.
+            $table->string('sub_category')->nullable();
             $table->text('description');
             $table->string('level')->nullable();
             $table->timestamps();

@@ -72,17 +72,17 @@ class ResumeService
    /**
     * Assemble user resume for render.
     */
-    public static function show(string $id = ''): array {
+    public static function getResume(string $id = ''): array {
         $user_id = $id;
         if($id === ''){
             $user_id = User::first()->id;
         }   
         
-        $resId = Resume::where('user_id', $user_id)->value('id');
+        $resId = Resume::where('user_id', $user_id)->sole()->id;
 
-        $collection = Resume::select('id','hasPort','summary')
+        $collection = Resume::select('id','summary','hasPort','file_location')
                     ->with([
-                        'skills:id,resume_id,category,description,level',
+                        'skills:id,resume_id,category,sub_category,description,level',
                         'references:id,resume_id,referee,referral',
                         'educations' => function ($query){
                             $query->select('id','resume_id','institution','start_date','end_date','degree','level')
@@ -93,6 +93,7 @@ class ResumeService
                             'institutionAddress.country:code,name'
                             ]);
                      }])->find($resId)->toArray();
+        $file = $collection['file_location'];
         $background['summary'] = $collection['summary'];
         $background['educations'] = ResumeService::scrubId($collection['educations'],['id','code']);
         $skills = ResumeService::scrubId($collection['skills']);
@@ -106,8 +107,7 @@ class ResumeService
                         'accomplishments:id,experience_id,heading,accomplishment',
                         'employerAddress:id,addressable_id,line_1,line_2,city,state,country_code',
                         'employerAddress.country:code,name'
-                        ])
-                    ->get()->toArray();
+                    ])->get()->toArray();
         $experience = [];
         $theads = [];
         $aheads = [];
@@ -122,11 +122,29 @@ class ResumeService
         }
         $experience['headings'] = array_filter(array_unique(array_merge($theads, $aheads)));
 
-        $collection = Portfolio::select('id','title','description','file_name','link')
-                    ->where('resume_id', $resId)
-                    ->get()->toArray();;
-        $portfolio = $collection;
-        $resume = ['background'=>$background,'experience'=>$experience,'portfolio'=>$portfolio,'skills'=>$skills,'references'=>$references];          
+        $resume = ['background'=>$background,'experience'=>$experience,'skills'=>$skills,'references'=>$references,'file'=>$file];   
+
         return $resume;
+    }
+
+    public static function getPortfolio(string $id = ''): array {
+        $user_id = $id;
+        if($id === ''){
+            $user_id = User::first()->id;
+        }  
+
+        $resId = Resume::where('user_id', $user_id)->sole()->id;
+
+        $collection = Portfolio::select('id','title','description','file_location','script','link')
+                    ->where('resume_id', $resId)
+                    ->with([
+                        'projects' => function ($query){
+                            $query->select('id','portfolio_id','title','details','link')
+                            ->with([
+                            'projectMedia:id,mediaable_id,location,type',
+                            ]);
+                    }])->get()->toArray();
+        $portfolio = ResumeService::scrubId($collection);
+        return $portfolio;
     }
 }

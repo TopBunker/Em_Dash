@@ -17,6 +17,8 @@
         <!--Page Wrapper-->
         <div class="@container relative inset-0 h-dvh bg-transparent">
             {{$slot}}
-        </div>     
+        </div>   
+        
+        @stack('scripts')
     </body>
 </html>

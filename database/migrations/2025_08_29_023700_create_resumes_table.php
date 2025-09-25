@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('hasPort')->default(false);
             $table->boolean('hasRef')->default(false);
             $table->boolean('hasImage')->default(false);
+            $table->string('file_location')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();

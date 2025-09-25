@@ -23,7 +23,7 @@ class ResumeFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'tel' => $this->faker->phoneNumber(),
+            'tel' => '+81 80 7576-6867',
             'title' => $this->faker->jobTitle(),
             'summary' => $this->faker->paragraph(),
         ];

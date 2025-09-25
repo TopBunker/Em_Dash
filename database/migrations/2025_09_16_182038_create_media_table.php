@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->foreignId('resume_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete()->primary();
-            $table->string('file_location');
+        Schema::create('media', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('mediaable');
+            $table->string('location');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('media');
     }
 };

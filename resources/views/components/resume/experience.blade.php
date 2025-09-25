@@ -6,9 +6,9 @@
     @foreach ($experiences as $experience)
     <div class="flex flex-col space-y-2">
         <!--Experience Header-->
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 gap-y-1 md:grid-cols-[minmax(auto,400px)_auto]">
             <h3>DATES</h3>
-            <p>{{$experience['start_date']}} - {{$experience['end_date']}}</p>
+            <p>{{$experience['start_date']}} - {{$experience['end_date'] ? $experience['end_date'] : 'present'}}</p>
             <h3>POSITION</h3>
             <p>{{$experience['position']}}</p>
             <h3>EMPLOYER</h3>
@@ -25,14 +25,13 @@
             @endphp
             @if(count($headings) > 0)
             @foreach ($headings as $key => $value)
-            <div class="flex flex-col">
                 @php
-                // Resume parent hasValue function
+                // check if current experience entry has any detail under the current  heading parent
                 $hasHeading = $this->hasValue($value, array_merge($experience['tasks'],$experience['accomplishments']));
                 @endphp
                 @if ($hasHeading)
-                    <p class="font-bold text-center">{{$value}}</p>       
-                @endif    
+                    <div class="flex flex-col">
+                    <p class="font-medium text-center">{{$value}}</p>         
                 <ul class="list-none">
                     @foreach ($experience['tasks'] as $task)
                     @if($task['heading'] === null)
@@ -55,12 +54,13 @@
                     @endif
                     @endforeach
                 </ul>
-            </div>
+                </div>
+                @endif  
             @endforeach
             <!--1.1　add tasks/accomplishments without headings last-->
             @if ($nullCheck) 
             <div class="flex flex-col">
-                <p class="font-bold text-center">Other</p>
+                <p class="font-medium text-center">Other</p>
                 <ul class="list-none">
                     @foreach ($experience['tasks'] as $task)
                     @if ($task['heading'] === null)

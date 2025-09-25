@@ -1,11 +1,10 @@
 <div id="app" x-data class="@container/main h-dvh grid grid-rows-[auto_1fr_auto]">
     <!--Header-->
-    <header class="relative bg-white/30 backdrop-blur-md shadow-md border-b border-accent-dark">
+    <header class="relative bg-white/50 backdrop-blur-md shadow-md border-b border-black">
         <livewire:layouts.header :$userId />
     </header>
     <!--Main-->
-    <main class="relative flex flex-col md:flex-row overflow-y-auto">
-        <div id="left-col" class="basis-1/6"></div>
+    <main class="relative overflow-y-auto max-md:p-4">
             <!-- Show loading spinner first time a component is loaded -->
             @if (!in_array($activeComponent, $loadedComponents))
             <div class="fixed z-50 h-dvh w-dvw text-center">
@@ -17,54 +16,37 @@
                 </div>
             </div>
             @else
-            <div class="relative basis-auto"> 
             <!-- Dynamically load view Livewire child component-->
-            <livewire:dynamic-component :is="$activeComponent" :key="$activeComponent" :$userId/>
-            </div>
+            <livewire:dynamic-component :is="$activeComponent" :$userId :key="$activeComponent.'-'.$userId"/>
             @endif
-        <div id="right-col" class="basis-2/5"></div>
     </main>
     <!--Footer-->
-    <footer class="fixed z-10 bottom-0 left-0 right-0">
+    <footer class="fixed z-20 bottom-0 left-0 right-0">
+        <div id="sectionNav"></div>
         <livewire:layouts.footer />
     </footer>
-
-    @script
-    <script>
-        let lastTab = localStorage.getItem('active');
-        let active = $wire.activeComponent.split('.').pop();
-        if(lastTab && (lastTab !== active)){
-            $wire.setComponent(lastTab);
-        }
-      // get settings
-      Livewire.hook('component.init', (c) => {
-        console.log('comp init');
-        let name = c.component.name;
-        let filter = name.split('.');
-        if(filter.includes('page')){
-            let active = filter.reverse()[0];
-            localStorage.setItem('active', active);
-            Alpine.store('app').currentPage = active;
-            // get settings like sections navs, if any
-            if(c.component.$wire.hasSettings){
-                Alpine.store('page').pageSettings.push(settings[active]);
-            }
-        }
-
-      });
-
-      document.addEventListener('livewire:initialized', () => {
-        // run settings when dom is ready
-        Alpine.store('page').runSettings();
-
-      });
-
-      Livewire.hook('morphed', (c) => {
-        // run settings when on each morph
-        Alpine.store('page').runSettings();
-      });
-        
-
-    </script>
-    @endscript
 </div>
+
+@script
+<script>
+    let lastPage = sessionStorage.getItem('active');
+    let active = $wire.activeComponent.split('.').pop();
+    if(lastPage && (lastPage !== active)){
+        $wire.setComponent(lastPage);
+        active = lastPage;
+    }else if(!lastPage){
+        sessionStorage.setItem('active', active);
+    }
+
+    Alpine.store('app').currentPage = active;   
+
+    Livewire.hook('morphed',() => {
+        document.querySelector('main').scrollTop = 0;
+        if ((Alpine.store('app').currentPage !== 'portfolio')) {
+            document.dispatchEvent(new Event('portfolio:off'));
+        }else{
+            document.dispatchEvent(new Event('portfolio:ready'));
+        }
+    });
+</script>
+@endscript

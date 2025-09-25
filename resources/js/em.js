@@ -1,28 +1,31 @@
+import ListenerManager from "./main/service/listenerManager";
+import PixiManager from "./main/service/pixiManager";
+
 // Global Listeners
 document.addEventListener('alpine:init', () => {
-    // global js app Data
+    // global app Data
     Alpine.store('app', {
+        pixi: null,
+        listeners: null,
         currentPage: null,
         showInfo: true,
         toggleInfo(){
             this.showInfo = !this.showInfo
         },
     });
-    // page utility data
+    // page data
     Alpine.store('page',{
+        portfolio: {initialized: false},
+        script: {},
         observer: new IntersectionObserver((items) => {
             //scrollspy
             let visible = items.filter(i => i.isIntersecting);
             if(visible.length){
                 visible.sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
+                let sectionData = document.querySelector('footer #sectionNav nav');
+                Alpine.$data(sectionData).section = visible[0].target.dataset.section;
             }     
-            if(document.querySelector('#innernav')){
-                let link = document.querySelector('#innernav');
-                link.__x.$data.section = visible[0].target.dataset.section;       
-                visible[0].target?.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'start'});
-            }
-            }, {rootMargin: '-20% 0% -60% 0%'}
-        ),
+        }, {rootMargin: '-40% 0% -60% 0%'}),
         scrollTo(section) {
             let el = document.querySelector(`section[data-section=${section}]`);
             el.scrollIntoView({scroll: 'smooth', inline: 'center', block: 'start'});
@@ -31,14 +34,14 @@ document.addEventListener('alpine:init', () => {
             if(!('IntersectionObserver' in window)){
                 const main = document.querySelector('main');
                 document.addEventListener('scroll', ()=>{
-                    if(document.querySelector('#innernav')){
-                    const link = document.querySelector('#innernav');
+                    if(document.querySelector('#innerNav')){
+                    const sectionData = document.querySelector('footer #sectionNav nav');
                     sections.forEach(section => {
                         if(section.offsetTop <= main.scrollTop + main.clientHeight/2){
-                            link.__x.$data.section = section.target.dataset.section;
+                             Alpine.$data(sectionData).section = section.target.dataset.section;
                         }
                         if((main.scrollTop + main.clientHeight) >= (main.scrollHeight - 1)){
-                            link.__x.$data.section = sections[sections.length - 1].target.dataset.section;
+                             Alpine.$data(sectionData).section = sections[sections.length - 1].target.dataset.section;
                         }
                     });
                     }
@@ -77,9 +80,15 @@ document.addEventListener('livewire:initialized', () => {
     },{passive: true});
     window.addEventListener('pointerup', () => {dragging=false});
 
-    // update local storage on navigation
+    // update local storage and clear settings on page navigation
     document.addEventListener('switchTo', (e) => {
-        localStorage.setItem('active', e.detail.active);
+        sessionStorage.setItem('active', e.detail.active);
+        Alpine.store('page').pageSettings = [];
+        Alpine.store('app').currentPage = e.detail.active;
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    Alpine.store('app').pixi = new PixiManager(document.querySelector('#canvas'));
+    Alpine.store('app').listeners = new ListenerManager(document.querySelector('#canvas'));
+});

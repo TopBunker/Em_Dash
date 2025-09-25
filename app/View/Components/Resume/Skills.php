@@ -22,7 +22,11 @@ class Skills extends Component
             if (!in_array($cat, $this->categories)) {
                 $this->categories[] = $cat; 
             }
-            $skills[$cat][] = $item['description'];
+            if ($item['sub_category']!==null) {
+                $skills[$cat][$item['sub_category']] = [$item['description'],$item['level']];
+            }else{
+                $skills[$cat][] = [$item['description'],$item['level']];
+            }
         }
         $this->skills = $skills;
     }

@@ -17,7 +17,6 @@ class Background extends Component
      */
     public function __construct($params)
     {
-
         $this->summary = $params['summary'];
         $this->educations = $params['educations'];
     }

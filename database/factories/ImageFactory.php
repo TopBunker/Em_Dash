@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'file_name' => $this->faker->imageUrl()
+            'file_location' => $this->faker->imageUrl()
         ];
     }
 }

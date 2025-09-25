@@ -31,4 +31,12 @@ class Experience extends Model
     public function employerAddress(): MorphOne {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'date: F Y',
+            'end_date' => 'date: F Y'
+        ];
+    }
 }

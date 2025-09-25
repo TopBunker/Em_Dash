@@ -13,7 +13,7 @@ class Paginator extends Component
     private $user;
 
     #[Locked]
-    private string $userId = '';
+    public string $userId = '';
     
     public string $activeComponent = '';
     

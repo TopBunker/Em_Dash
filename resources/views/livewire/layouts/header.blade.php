@@ -2,8 +2,8 @@
     <!--Default Profile Header-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
-            <img src="{{ asset('storage/images/'.$image )}}" 
-            class="img-fluid w-24 h-24 border-2 border-gray-300 shadow- rounded-full aspect-square object-cover" 
+            <img src="{{ asset('storage/images/'.$image)}}" 
+            class="w-24 h-24 border-2 border-gray-300 shadow-xl/30 rounded-full aspect-square object-cover" 
             alt="User profile picture">
         </div>
         <div class="flex flex-col justify-around text-center ml-2 @sm:mx-3 @sm:ml-auto">
@@ -32,35 +32,35 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
                 </svg> 
-                {{$contact['address']->city.', '.$contact['address']->country->name}} 
+                {{$contact['address']->city.', '.$contact['address']->country->name}}
             </p>
             <p class="text-brand-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                 </svg> 
-                {{$contact['tel']}} 
+                <span class="highlight"><span>{{ $contact['tel'][0] }}</span><span>+1</span><span>897</span>{{ ' '.$contact['tel'][1].' ' }}<span>573-6739</span>{{ $contact['tel'][2] }}</span>
             </p>
             <p class="text-brand-light">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-block fill-brand" viewBox="0 0 16 16">
                     <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
                 </svg> 
-                {{$contact['email']}} 
+                <span class="highlight"><span>{{ $contact['email'][0] }}</span><span>client</span>@<span>emdash.</span><span>gmail.</span>{{ $contact['email'][1] }}<span>org</span>{{ '.'.$contact['email'][2] }}</span>
             </p>
         </div>
     </div>
 
     <!--Desktop nav-->
-    <div  class="hidden @md:flex flex-row justify-between items-center border-t border-accent-dark py-2 px-8 w-full">
+    <div  class="hidden @md:flex flex-row justify-between items-center border-t border-black py-2 px-8 w-full">
         <div class="flex flex-row items-center gap-x-4">
-            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click="$store.app.currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
+            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
                 Resume
             </a>
             <span>|</span>
-            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click="$store.app.currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
+            <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
                 Portfolio
             </a>
         </div>
-        <a href="#" class="text-accent-dark px-3 btn-cta" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click="$store.app.currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
+        <a href="#" class="btn-cta shadow-xl/30" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
             Contact
         </a>
     </div>
