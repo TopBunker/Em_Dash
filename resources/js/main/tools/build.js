@@ -167,8 +167,11 @@ function pixifyText(str,cut,font){
  * @param {number} y block row
  * @returns {Graphics} Pixijs Graphics object
  */
-function block(c, x, y){
-  let tile = grid[x][y];
+function block(g, c, x, y){
+  if (!g) {
+    g = grid;
+  }
+  let tile = g[x][y];
   let shape = new Graphics();
   shape.rect(tile.x, tile.y, tile.width, tile.height);
   shape.stroke(c);

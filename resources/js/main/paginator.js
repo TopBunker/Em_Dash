@@ -138,7 +138,7 @@ $(async () => {
       c.addChildAt(n,0);
       c.addChildAt(t,1);
       let cxy = gridify(c,col,row);
-      nodes[text.replace(/\s/g,'').toLowerCase()] = {name: text, button: link, node: cxy, open: false, origin: {x: cxy.x, y: cxy.y}};
+      nodes[text.replace(/\s/g,'').toLowerCase()] = {text: text, button: link, node: cxy, open: false, origin: {x: cxy.x, y: cxy.y}};
       col+=3;
     });
 
@@ -179,6 +179,7 @@ $(async () => {
         portfolioOpen = false;
         document.dispatchEvent(new Event('portfolio.closing'));
       } else {
+        document.querySelector('main').scrollTop = 0;
         // open/switch section
         Alpine.$data(parent).section = section; // trigger x-show
         if(!portfolioOpen){

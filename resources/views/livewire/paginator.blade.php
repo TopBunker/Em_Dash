@@ -48,5 +48,13 @@
             document.dispatchEvent(new Event('portfolio:ready'));
         }
     });
+
+    let delay;
+    window.addEventListener('resize', () => {
+        clearTimeout(delay);
+        delay = setTimeout(() => {
+            location.reload();
+        }, 500);
+    });
 </script>
 @endscript

@@ -92,4 +92,19 @@
     .alert-error {
         @apply bg-red-600/30 border-red-600;
     }
+
+    #portfolio > section.closed {
+        scale: 0;
+        opacity: 0;
+        transition: opacity 0.7s ease-out, scale 0.7s ease-out;
+    }
+
+    #portfolio > section.open {
+        scale: 100%;
+        opacity:  100%;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+    }
+
 }
+
