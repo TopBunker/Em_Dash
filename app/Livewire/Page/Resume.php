@@ -4,6 +4,7 @@ namespace App\Livewire\Page;
 
 use App\Services\ResumeService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -37,7 +38,7 @@ class Resume extends Component
      */
     public function hasValue(string $value, array $array): bool {
         if(!empty($array)){
-            foreach ($array as $key => $item) {
+            foreach ($array as $item) {
                 if(is_array($item)){
                     if($this->hasValue($value, $item)){
                         return true;
@@ -64,6 +65,7 @@ class Resume extends Component
 
     public function render()
     {
-        return view('livewire.page.resume', ['background' => $this->background, 'experience' => $this->experience, 'portfolio' => $this->portfolio, 'skills' => $this->skills, 'references' => $this->references]);
+        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        return view('livewire.page.resume', ['authorized' => $authorized, 'background' => $this->background, 'experience' => $this->experience, 'portfolio' => $this->portfolio, 'skills' => $this->skills, 'references' => $this->references]);
     }
 }

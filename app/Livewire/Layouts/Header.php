@@ -5,20 +5,32 @@ namespace App\Livewire\Layouts;
 use App\Models\Image;
 use App\Models\Resume;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Modelable;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Header extends Component
 {
     
+    #[Locked]
     public string $fName = 'Jordane';
+
+    #[Locked]
     public string $lName = 'Delahaye';
+
+    #[Locked]
     public array $contact = [];
+
+    #[Locked]
     public string $image = 'system/profile-picture-placeholder.png';
+
+    #[Locked]
     public string $title = 'Problem Solver';
 
-    public $userId;
+    protected string $userId;
 
     public function mount($userId){
         $this->userId = $userId;
@@ -55,9 +67,13 @@ class Header extends Component
             return 'Unknown user.';
         }
     }
+
+    #[On('authorize')]
+    public function refresh(){}
     
     public function render()
     {
-        return view('livewire.layouts.header');
+        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        return view('livewire.layouts.header', ['authorized' => $authorized]);
     }
 }

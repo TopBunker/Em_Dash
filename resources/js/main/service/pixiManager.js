@@ -2,50 +2,79 @@ import { Application, Container, Graphics, Sprite, DisplacementFilter, Assets, F
 
 
 class PixiManager {
+    static instance = null;
+
     constructor(canvas) {
-        this.application = new Application();
+        if (PixiManager.instance) return PixiManager.instance;
+
+        this.app = new Application();
+        this.ready = this._init();
         this.dom = canvas;
-        this.appInit();
+        PixiManager.instance = this;
     }
 
-    async appInit() {
-        await this.application.init({
+    async _init() {
+        await this.app.init({
             backgroundAlpha: 0, 
             powerPreference: 'high-performance',
             width: window.innerWidth,
             height: window.innerHeight,
-            resizeTo: window,
             autoDensity: true,
             antialias: false,
             resolution: window.devicePixelRatio,
             imageSmoothingEnabled: true,
             imageSmoothingQuality: "high",
+            resizeTo: window
         });
-        this.dom.appendChild(this.application.canvas);
+
+        if (!this.app.canvas.parentElement) {
+            this.dom.appendChild(this.app.canvas);
+        }
+        if (!this.app.ticker.started) {
+            this.app.ticker.start();
+        }
+        return this.app;
     }
 
-    addChild(child) {
-        this.application.stage.addChild(child);
+    async addChild(child) {
+        const app = await this.ready;
+        app.stage.addChild(child);
     }
 
-    removeChild(child) {
-        this.application.stage.removeChild(child);
+    async addChildAt(child, position) {
+        const app = await this.ready;
+        console.log(app.stage.children.length, position);
+        if(app.stage.children.length <= (position + 1)){
+            app.stage.addChildAt(child, position);
+        }else {
+            console.error('Position out of range.');
+            return 'Out of range.';
+        }
     }
 
-    addTicker(fn) {
-        this.application.ticker.add(fn);
+    async removeChild(child) {
+        const app = await this.ready;
+        app.stage.removeChild(child);
     }
 
-    removeTicker(fn) {
-        this.application.ticker.remove(fn);
+    async addTicker(fn) {
+        const app = await this.ready;
+        app.ticker.add(fn);
     }
 
-    getApp() {
-        return this.application;
+    async addOnce(fn, context) {
+        const app = await this.ready;
+        app.ticker.addOnce(fn, context);
     }
 
-    render() {
-        this.application.renderer.render(this.application.stage);
+    async removeTicker(fn) {
+        const app = await this.ready;
+        app.ticker.remove(fn);
+    }
+
+    async render() {
+        const app = await this.ready;
+        app.renderer.render(app.stage);
     }
 }
 

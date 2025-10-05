@@ -1,3 +1,4 @@
+@if ($authorized)
 <div x-data id="resume" class="relative flex flex-col md:flex-row">
         <div id="left-col" class="max-md:hidden md:basis-2/6"></div>
         <div class="relative basis-auto flex flex-col justify-between gap-y-24 pb-40 px-4 pt-8"> 
@@ -57,3 +58,4 @@
         Alpine.store('page').runSettings();     
 </script>
 @endscript
+@endif

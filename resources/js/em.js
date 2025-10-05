@@ -6,7 +6,7 @@ document.addEventListener('alpine:init', () => {
     // global app Data
     Alpine.store('app', {
         pixi: null,
-        listeners: null,
+        listeners: new ListenerManager(),
         currentPage: null,
         showInfo: true,
         toggleInfo(){
@@ -82,13 +82,12 @@ document.addEventListener('livewire:initialized', () => {
 
     // update local storage and clear settings on page navigation
     document.addEventListener('switchTo', (e) => {
-        sessionStorage.setItem('active', e.detail.active);
+        let to = e.detail.active;
+        sessionStorage.setItem('active', to);
         Alpine.store('page').pageSettings = [];
-        Alpine.store('app').currentPage = e.detail.active;
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     Alpine.store('app').pixi = new PixiManager(document.querySelector('#canvas'));
-    Alpine.store('app').listeners = new ListenerManager(document.querySelector('#canvas'));
 });

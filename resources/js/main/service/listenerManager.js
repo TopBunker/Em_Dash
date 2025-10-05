@@ -15,12 +15,13 @@ class ListenerManager {
         });
     }
 
-    removeAll() {
-        this.listeners.forEach(({el, type, handler, options}) => {
-            el.removeEventListener(type, handler, options);
-        });
+    dispatch(el, type) {
+        el.dispatchEvent(new Event(type));
     }
 
+    dispatchCustom(el, type, detail) {
+        el.dispatchEvent(new CustomEvent(type, detail));
+    }
 }
 
 export default ListenerManager;

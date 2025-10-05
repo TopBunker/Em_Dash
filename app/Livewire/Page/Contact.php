@@ -3,27 +3,18 @@
 namespace App\Livewire\Page;
 
 use App\Models\Message;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Illuminate\Validation\ValidationException;
-use Livewire\Attributes\{Locked, Validate};
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Throwable;
 
 class Contact extends Component
 {
     use WithFileUploads;
-
-    #[Locked]
-    public $hasSettings = false;
-
-    #[Locked]
-    public string $userId = '';
-
-    #[Locked]
-    public $user_mail = [];
 
     #[Validate('required', message: 'Please provide the name of either an organization or individual for reference.')]
     public string $name = '';
@@ -41,11 +32,6 @@ class Contact extends Component
     #[Validate(['uploads.*' => 'file|nullable|mimetypes:application/pdf,application/msword|mimes:pdf,doc,docx|extensions:pdf,doc,docx'])]
     public $uploads = [];
 
-    public function mount(string $userId): void {
-        $this->userId = $userId;
-        $this->user_mail = preg_split('/@|\.(?=[^.]+$)/', User::find($userId)->email, 3);
-    }
-
     /**
      * Save message and send response.
      * @return RedirectResponse 
@@ -55,35 +41,38 @@ class Contact extends Component
     public function send(): RedirectResponse {
         $this->validate();
 
-        $result = DB::transaction( function () {
-            $message = Message::create([
-                'user_id' => $this->userId,
-                'name' => $this->name,
-                'mail' => $this->email,
-                'subject' => $this->subject,
-                'message' => $this->message,
-            ]);
+        try{ 
+            $result = DB::transaction( function () {
+                $message = Message::create([
+                    'user_id' => $this->userId,
+                    'name' => $this->name,
+                    'mail' => $this->email,
+                    'subject' => $this->subject,
+                    'message' => $this->message,
+                ]);
 
-            if (!empty($this->uploads)) {
-                foreach ($this->uploads as $upload) {
-                    $location = $upload->store(path: 'documents');
-                    $message->documents()->create([
-                        'file_location' => $location,
-                    ]);
+                if (!empty($this->uploads)) {
+                    foreach ($this->uploads as $upload) {
+                        $location = $upload->store(path: 'documents');
+                        $message->documents()->create([
+                            'file_location' => $location,
+                        ]);
+                    }
                 }
+
+                return $message;
+            });
+            if ($result) {
+                $this->reset();
+                return back()->with('success', 'Message sent!');
+            } else {
+                return back()->with('error', 'Message could not be sent. Please try again.');
             }
-
-            return $message;
-        });
-        
-        if($result !== null){
-            $this->reset();
-
-            return back()->with('success', 'Message sent!');
-        }else{
-            return back()->with('error', 'Message could not be sent. Please try again or send directly to jordane.delahaye@icloud.com.');
+            
+        } catch (Throwable $e) {
+            report($e);
+            return back()->with('error', 'Message could not be sent. Please try again.');
         }
-
     }
 
     public function render()

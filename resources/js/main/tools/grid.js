@@ -147,31 +147,31 @@ function quadrant(){
  */
 function gridify(a, col, row){
   let d = grid[col][row];
-  a.x = d.x;
-  a.y = d.y;
+  a.x = Math.round(d.x);
+  a.y = Math.round(d.y);
   return a;
 }
 
 function altGridify(altGrid, a, col, row){
   let d = altGrid[col][row];
-  a.x = d.x;
-  a.y = d.y;
+  a.x = Math.round(d.x);
+  a.y = Math.round(d.y);
   return a;
 }
   
 function gridifyCenter(a, col, row){
   let d = grid[col][row];
   a.anchor.set(0.5);
-  a.x = d.x + (d.width / 2);
-  a.y = d.y + (d.height / 2);
+  a.x = Math.round(d.x) + (d.width / 2);
+  a.y = Math.round(d.y) + (d.height / 2);
   return a;
 }
 
 function altGridifyCenter(altGrid, a, col, row){
   let d = altGrid[col][row];
   a.anchor.set(0.5);
-  a.x = d.x + (d.width / 2);
-  a.y = d.y + (d.height / 2);
+  a.x = Math.round(d.x) + (d.width / 2);
+  a.y = Math.round(d.y) + (d.height / 2);
   return a;
 }
 

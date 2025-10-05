@@ -38,19 +38,28 @@
         sessionStorage.setItem('active', active);
     }
 
-    Alpine.store('app').currentPage = active;   
+    Alpine.store('app').currentPage = active; 
 
-    Livewire.hook('morphed',() => {
+    Livewire.hook('morphed', (c) => {
         document.querySelector('main').scrollTop = 0;
-        if ((Alpine.store('app').currentPage !== 'portfolio')) {
+
+        if (Alpine.store('app').currentPage !== 'portfolio') {
             document.dispatchEvent(new Event('portfolio:off'));
-        }else{
+        } else {
             document.dispatchEvent(new Event('portfolio:ready'));
+        }
+
+        if (Alpine.store('app').currentPage === 'contact') {
+            document.dispatchEvent(new Event('contact:ready'));
+        }
+
+        if (Alpine.store('app').currentPage === 'resume') {
+            document.dispatchEvent(new Event('resume:ready'));
         }
     });
 
     let delay;
-    window.addEventListener('resize', () => {
+    Alpine.store('app').listeners.add(window, 'resize', () => {
         clearTimeout(delay);
         delay = setTimeout(() => {
             location.reload();

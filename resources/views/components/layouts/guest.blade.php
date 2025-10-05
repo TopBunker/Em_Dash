@@ -12,7 +12,7 @@
     </head>
     <body class="font-poppins antialiased max-h-dvh">
         <!-- Background Pixi Canvas-->
-        <div id="canvas" class="fixed inset-0 -z-10"></div>
+        <div id="canvas" class="fixed inset-0 -z-10 h-dvh w-dvw"></div>
 
         <!--Page Wrapper-->
         <div class="@container relative inset-0 h-dvh bg-transparent">

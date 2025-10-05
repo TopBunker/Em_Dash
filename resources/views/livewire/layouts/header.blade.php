@@ -14,6 +14,7 @@
     <!--Contact Details-->
     <div class="flex flex-col justify-around my-2">
         <!--Chevron Button-->
+        @if ($authorized)
         <button id="links-toggle" 
             class="hover:text-accent-light transition mx-auto lg:hidden"
             x-on:click="$store.app.toggleInfo()"
@@ -47,6 +48,9 @@
                 <span class="highlight"><span>{{ $contact['email'][0] }}</span><span>client</span>@<span>emdash.</span><span>gmail.</span>{{ $contact['email'][1] }}<span>org</span>{{ '.'.$contact['email'][2] }}</span>
             </p>
         </div>
+        @else
+        <p>Open resume to view contact details and links.</p>
+        @endif
     </div>
 
     <!--Desktop nav-->
@@ -60,7 +64,7 @@
                 Portfolio
             </a>
         </div>
-        <a href="#" class="btn-cta shadow-xl/30" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
+        <a href="#" class="btn-cta" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'contact'; $dispatch('switchTo', {active: 'contact'})" aria-current="" aria-label="View Contact">
             Contact
         </a>
     </div>

@@ -11,9 +11,7 @@ use Livewire\Component;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class Portfolio extends Component
-{
-    public $hasSettings = false;
-    
+{    
     public $portfolios =[];
 
     #[Locked]

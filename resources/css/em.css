@@ -59,7 +59,7 @@
     }
 
     .btn-cta {
-        @apply text-brand-dark px-3 py-1 font-semibold rounded-full border border-brand-dark hover:text-white hover:bg-brand-dark hover:border-transparent active:bg-brand-dark active:text-white focus:outline-none focus:ring-2 focus:ring-brand-dark focus:bg-brand-dark focus:text-white focus:ring-offset-2 transition;
+        @apply text-brand-dark px-3 py-1 font-semibold rounded-full shadow-xl/30 border border-brand-dark hover:cursor-pointer hover:text-white hover:bg-brand-dark hover:border-transparent active:bg-brand-dark active:text-white focus:outline-none focus:ring-2 focus:ring-brand-dark focus:bg-brand-dark focus:text-white focus:ring-offset-2 transition;
     }
 
     .link-nav {
@@ -92,19 +92,5 @@
     .alert-error {
         @apply bg-red-600/30 border-red-600;
     }
-
-    #portfolio > section.closed {
-        scale: 0;
-        opacity: 0;
-        transition: opacity 0.7s ease-out, scale 0.7s ease-out;
-    }
-
-    #portfolio > section.open {
-        scale: 100%;
-        opacity:  100%;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in;
-    }
-
 }
 

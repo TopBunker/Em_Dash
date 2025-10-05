@@ -1,33 +1,34 @@
 <div class="p-4 pb-40 mx-auto max-w-3xl">
         <h1 class="text-brand-dark mb-2">CONNECT</h1>
-        <p class="py-4" >You may also email inquiries, invitations or feedback directly to <span class="highlight inline"><span>{{$user_mail[0]}}</span><span>client</span>@<span>emdash.</span><span>gmail.</span>{{ $user_mail[1] }}<span>org</span>{{ '.'.$user_mail[2] }}</span>.</p>
+        <p class="py-4" >Reach out with inquiries, invitations or feedback.</p>
         <form wire:submit="send" class="mt-8 space-y-5">
+            @csrf
             <!--Name-->
             <div>
-                <label class="text-sm text-brand font-medium mb-2 block" for="send_name">Name/Company</label>
+                <label class="text-sm text-brand font-medium mb-2 block" for="sender_name">Name/Company</label>
                 <input id="sender_name" type="text" wire:model="name" placeholder="Enter Name"
-                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 focus:bg-transparent text-sm outline-0 transition-all" />
+                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 text-sm outline-0 transition-all" />
                 <div>@error('name') <span class="error">{{ $message }}</span> @enderror</div>
             </div>
             <!--Email-->
             <div>
                 <label class="text-sm text-brand font-medium mb-2 block" for="sender_email">Email</label>
                 <input id="sender_email" type="email" wire:model="email" placeholder="Enter Email"
-                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 focus:bg-transparent text-sm outline-0 transition-all" />
+                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 text-sm outline-0 transition-all" />
                 <div>@error('email') <span class="error">{{ $message }}</span> @enderror</div>
             </div>
             <!--Subject-->
             <div>
                 <label class="text-sm text-brand font-medium mb-2 block" for="subject">Subject</label>
                 <input id="subject" type="text" wire:model="subject" placeholder="Enter Subject"
-                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 focus:bg-transparent text-sm outline-0 transition-all" />
+                class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 text-sm outline-0 transition-all" />
                 <div>@error('subject') <span class="error">{{ $message }}</span> @enderror</div>
             </div>
             <!--Message-->
             <div>
                 <label class="text-sm text-brand font-medium mb-2 block" for="message">Message</label>
                 <textarea id="message" wire:model="message" placeholder="Enter Message" rows="6"
-                class="w-full px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 focus:bg-transparent text-sm pt-3 outline-0 transition-all"></textarea>
+                class="w-full px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 text-sm pt-3 outline-0 transition-all"></textarea>
                 <div>@error('message') <span class="error">{{ $message }}</span> @enderror</div>
             </div>
             <!--File Input-->
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <!--Submit button-->
-            <button type="submit"class="btn-cta hover:cursor-pointer shadow-xl/30">Send message</button>
+            <button type="submit"class="btn-cta">Send message</button>
         </form>
         @session('success')
             <div class="alert alert-success" role="alert">

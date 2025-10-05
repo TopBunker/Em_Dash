@@ -21,7 +21,7 @@
                 </svg>
             </button>
             <!--Contact button-->
-            <a href="#" class="btn-cta shadow-xl/30" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='contact'; $dispatch('switchTo', {active: 'contact'})" aria-label="View Contact">
+            <a href="#" class="btn-cta shadow-xl/30" x-bind:aria-current="$store.app.currentPage === 'contact' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='contact'; menuOpen = false; $dispatch('switchTo', {active: 'contact'})" aria-label="View Contact">
                 Contact
             </a>
         </div>

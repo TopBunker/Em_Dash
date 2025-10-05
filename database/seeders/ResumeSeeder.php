@@ -260,10 +260,10 @@ class ResumeSeeder extends Seeder
 
                 $web = $res->portfolios()->create([
                     'title' => 'Software Developer (Full-Stack Web Focus)',
-                    'description' => 'My programming career began in high school, where I developed a personnel management system in C++ for a class project. I then completed my degree in Computer Science. For my capstone project, I led a group of four in developing a rudimentary chess AI in Python and Java. 
-                        After graduating, I worked in Hokkaido as an English teacher, and took the initiative to design and develop a website for Japanese students to continuously reinforce fundamental elements of the English language. 
-                        Although the website is no longer maintained, its use in the classroom resulted in improved engagement, response speed, and retention in target areas. Whether it\'s crafting effective content that bridges technical and non-technical perspectives, or designing and implementing scalable, fault-tolerant software, my approach is holistic. 
-                        I  consider how people, processes, and technology interact in the overall system to achieve effective and efficient results. As a full-stack web developer, this means I examine how frontend, backend, and database systems are integrated and evaluate trade-offs to ensure reliability.'
+                    'description' => 'My programming experience began in high school, where I developed a personnel management system in C++ for a class project. I then completed my degree in Computer Science. For my capstone project, I led a group of four in developing a rudimentary chess AI in Python and Java. 
+                    After graduating, I worked in Hokkaido as an English teacher, and took the initiative to design and develop a website for Japanese students to continuously reinforce fundamental elements of the English language. Although the website is no longer maintained, its use in the classroom resulted in improved engagement, response speed, and retention in target areas. 
+                    Whether it\'s crafting effective content that bridges technical and non-technical perspectives, or designing and implementing scalable, fault-tolerant software, my approach is holistic. I  consider how people, processes, and technology interact in the overall system to achieve effective and efficient results. As a full-stack web developer, this means I examine how frontend, backend, and database systems are integrated to ensure reliability. 
+'
                 ]);
 
                 $pro1 = $web->projects()->create([
@@ -277,14 +277,20 @@ class ResumeSeeder extends Seeder
                 ]);
 
                 $web->projects()->create([
-                    'title' => 'Seavie Caribbean',
+                    'title' => 'seaviecaribbean.com',
                     'link' => 'https://www.seaviecaribbean.com'
                 ]);
 
-                $web->projects()->create([
+                $pro3 = $web->projects()->create([
                     'title' => 'Dash (this website)',
-                    'details' => 'Dash is a project to develop a page builder that enables users to create personalized resumes and portfolios with a single-page app experience.'
+                    'details' => 'Dash is an ongoing project to develop a streamlined, easy-to-use platform for creators to showcase their work via customizable single-page apps.'
                 ]);
+
+                $pro3->projectMedia()->create([
+                    'location' => 'https://github.com/TopBunker/Em_Dash/tree/main',
+                    'type' => 'link'
+                ]);
+
 
             }); 
         }catch (Throwable $e){

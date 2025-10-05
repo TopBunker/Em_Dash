@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\{Layout, Locked, On};
 use Livewire\Component;
 
@@ -15,6 +16,7 @@ class Paginator extends Component
     #[Locked]
     public string $userId = '';
     
+    #[Locked]
     public string $activeComponent = '';
     
     public $loadedComponents = [];
@@ -29,8 +31,13 @@ class Paginator extends Component
         }
         
         $this->userId = $this->user->id;
-        
-        $this->setComponent('resume');
+
+        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        if ($authorized) {
+            $this->setComponent('resume');
+        }else{
+             $this->setComponent('resume-access');
+        }
     }
 
     /**
@@ -40,13 +47,28 @@ class Paginator extends Component
      */
     #[On('switchTo')]
     public function setComponent(string $active): void { 
-        $component = 'page.'.$active;
+        $component = '';
+        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        if ($active === 'resume') {
+            if ($authorized) {
+                $component = 'page.'.$active;
+            }else{
+                $component = 'page.resume-access';
+            } 
+        } else {
+            $component = 'page.'.$active;
+        }
         $this->activeComponent = $component;
 
         if(!in_array($component, $this->loadedComponents)){
             $this->loadedComponents[] = $this->activeComponent;
         }
      }
+
+    #[On('authorize')]
+    public function refresh(){
+        $this->setComponent('resume');
+    }
 
     public function render()
     {
