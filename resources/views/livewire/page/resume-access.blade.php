@@ -1,6 +1,6 @@
 <div x-data>
         <div class="max-w-md mx-auto mt-12 p-6 bg-white shadow-lg rounded">
-            <p>Enter password to view resume. Other pages are open.</p>
+            <p>Enter password to view résumé. Other pages are open.</p>
             <form wire:submit.prevent="checkPassword" class="space-y-8 mt-8">
                 @csrf
                 <input type="text" name="username" value="visitor" autocomplete="off" class="hidden">

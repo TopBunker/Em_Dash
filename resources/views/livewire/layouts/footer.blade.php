@@ -4,7 +4,7 @@
         <div id="mobile-menu" class="flex flex-col pb-2 origin-bottom" 
             x-show="menuOpen" x-transition>
             <a href="#" class="px-4 py-2 link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='resume'; menuOpen = false; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
-                Resume
+                Résumé
             </a>
             <a href="#" class="px-4 pt-2 link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click.prevent="$store.app.currentPage='portfolio'; menuOpen = false; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
                 Portfolio

@@ -49,7 +49,7 @@
             </p>
         </div>
         @else
-        <p>Open resume to view contact details and links.</p>
+        <p>Unlock résumé to view contact details and links.</p>
         @endif
     </div>
 
@@ -57,7 +57,7 @@
     <div  class="hidden @md:flex flex-row justify-between items-center border-t border-black py-2 px-8 w-full">
         <div class="flex flex-row items-center gap-x-4">
             <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'resume' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'resume'; $dispatch('switchTo', {active: 'resume'})" aria-label="View Resume">
-                Resume
+                Résumé
             </a>
             <span>|</span>
             <a href="#" class="link-nav" x-bind:aria-current="$store.app.currentPage === 'portfolio' ? 'page' : null" x-on:click.prevent="$store.app.currentPage = 'portfolio'; $dispatch('switchTo', {active: 'portfolio'})" aria-label="View Portfolio">
