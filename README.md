@@ -9,11 +9,11 @@ The project began as a personal résumé and portfolio site, built with Laravel 
 
 ### Key Features
 
-:closed_lock_with_key: Secure résumé access with optional password protection
-:file_folder: Dynamic content management through Livewire components
-:incoming_envelope: Integrated contact form with document upload support
-:jigsaw: Modular and extensible architecture (ready for future dashboard features)
-:recycle: Built with clean, scalable code following Laravel best practices
+:closed_lock_with_key: Secure résumé access with optional password protection\
+:file_folder: Dynamic content management through Livewire components\
+:incoming_envelope: Integrated contact form with document upload support\
+:jigsaw: Modular and extensible architecture (ready for future dashboard features)\
+:recycle: Built with clean, scalable code following Laravel best practices\
 
 
 ### Portfolio Context
