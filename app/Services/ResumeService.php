@@ -80,7 +80,7 @@ class ResumeService
         
         $resId = Resume::where('user_id', $user_id)->sole()->id;
 
-        $collection = Resume::select('id','summary','hasPort','file_location')
+        $collection = Resume::select('id','summary','has_port','file_location')
                     ->with([
                         'skills:id,resume_id,category,sub_category,description,level',
                         'references:id,resume_id,referee,referral',

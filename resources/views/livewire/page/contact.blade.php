@@ -24,6 +24,9 @@
                 class="w-full py-2.5 px-4 text-slate-800 bg-gray-100 border border-gray-200 focus:border-slate-900 text-sm outline-0 transition-all" />
                 <div>@error('subject') <span class="error">{{ $message }}</span> @enderror</div>
             </div>
+            <div style="display: none;">
+                <input type="text" wire:model.defer="fielder" autocomplete="off">
+            </div>
             <!--Message-->
             <div>
                 <label class="text-sm text-brand font-medium mb-2 block" for="message">Message</label>
@@ -66,4 +69,5 @@
                 {{ $value }}
             </div>
         @endsession
+        @error('fielder') <div class="alert alert-error" role="alert">{{ $message }}</div>@enderror
 </div>

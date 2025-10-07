@@ -89,8 +89,6 @@ $(async () => {
 
         blocks.addChild(txt);
         blocks.y = window.innerHeight;
-
-        container.addChild(blocks);
     }
 
     function buildCover() {
@@ -139,21 +137,21 @@ $(async () => {
         function setUp() {
             if (!set) {
                 if(section.getBoundingClientRect().height > 0){
-                    scrollState = openState;
-                    animationState = textAnimation;
-                    set = true;
-                }
-            } else {
-                if(section.getBoundingClientRect().height > 0){
                     container.addChild(blocks);
                     scrollState = openState;
                     animationState = textAnimation;
-                }
+                    set = true;
+                } 
+             } else {
+                if(section.getBoundingClientRect().height > 0){
+                    container.addChild(blocks);
+                    scrollState = openState;
+                } 
             }
         }
 
         const startSate = (delta) => {
-            let a = mainContent.getBoundingClientRect().top - 50 - blocks.height ;
+            let a = mainContent.getBoundingClientRect().top - 50 - blocks.height;
             cover.y = a;
         }
 
@@ -191,6 +189,9 @@ $(async () => {
 
             if (a === end) {
                 animationState = nullState;
+                a = 0;
+                index = 0;
+                set = true;
             }
 
             if ((count % 2) === 0) {            

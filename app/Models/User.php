@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function messages(): HasMany {
         return $this->hasMany(Message::class);
     }
+
+    public function resumeAccess(): HasOne {
+        return $this->hasOne(ResumeAccess::class);
+    }
 }

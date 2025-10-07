@@ -22,7 +22,7 @@ class ResumeFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->hasResumeAccess(),
             'tel' => '+81 80 7576-6867',
             'title' => $this->faker->jobTitle(),
             'summary' => $this->faker->paragraph(),

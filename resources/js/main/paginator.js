@@ -295,7 +295,7 @@ $(async () => {
         }
         link.open = true;
         portfolioOpen = true;
-        document.dispatchEvent(new CustomEvent('portfolio.opening',{detail: {name: link.text}}));
+        document.dispatchEvent(new CustomEvent('portfolio.opening', {detail: {name: link.text}}));
       }
     }
 

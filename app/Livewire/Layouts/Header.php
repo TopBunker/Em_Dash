@@ -43,7 +43,7 @@ class Header extends Component
             $contact = array('email'=>$mail);
 
             if(Schema::hasTable('resumes')){
-                $resume = Resume::select('id','title','tel','hasImage','status')
+                $resume = Resume::select('id','title','tel','has_image','status')
                     ->where('user_id', $userId)
                     ->with([
                         'personalAddress:id,addressable_id,line_1,line_2,city,state,country_code',
@@ -52,7 +52,7 @@ class Header extends Component
                     ->first();
                 $this->title = $resume->title;
 
-                if(Schema::hasTable('images') && $resume->hasImage){
+                if(Schema::hasTable('images') && $resume->has_image){
                     $fileName = Image::where('resume_id',$resume->id)->value('file_location');
                     $this->image = $fileName;
                 }

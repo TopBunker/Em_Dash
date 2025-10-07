@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resumes', function (Blueprint $table) {
+        Schema::create('resume_accesses', function (Blueprint $table) {
             $table->id();
             $table->ulid('user_id')->unique();
-            $table->string('tel')->nullable();
-            $table->string('title');
-            $table->text('summary');
-            $table->string('status')->default('draft');
-            $table->boolean('has_port')->default(false);
-            $table->boolean('has_image')->default(false);
-            $table->string('file_location')->nullable();
+            $table->string('access_key');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('resume_accesses');
     }
 };

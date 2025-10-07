@@ -13,7 +13,7 @@ The project began as a personal résumé and portfolio site, built with Laravel 
 :file_folder: Dynamic content management through Livewire components\
 :incoming_envelope: Integrated contact form with document upload support\
 :jigsaw: Modular and extensible architecture (ready for future dashboard features)\
-:recycle: Built with clean, scalable code following Laravel best practices\
+:recycle: Built with clean, scalable code following Laravel best practices
 
 
 ### Portfolio Context
@@ -81,7 +81,16 @@ php artisan key:generate
 php artisan migrate:fresh --seed
 ```
 
-5. Run server:
+5. Populate storage with necessary files and create symlink:
+
+```
+php artisan storage:link
+```
+
+[!NOTE]
+For the most part, the app is designed to work without these assets. However, some features will throw an error in console.
+
+6. Run server:
 
 ```
 npm run dev && npm run build
@@ -94,3 +103,6 @@ Licensed under CC BY-NC 4.0 — © 2025 Jordane Delahaye.
 Shared for portfolio and educational purposes. You’re welcome to explore, learn from, or adapt this project for non-commercial purposes with attribution.
 
 
+### Note
+
+Some files are intended to be user-specific and will ultimately be generated dynamically.

@@ -2,9 +2,15 @@
     <!--Default Profile Header-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
-            <img src="{{ asset('storage/images/'.$image)}}" 
+            @if ($authorized)
+            <img src="{{ asset('storage/images/'.$image) }}" 
             class="w-24 h-24 border-2 border-gray-300 shadow-xl/30 rounded-full aspect-square object-cover" 
             alt="User profile picture">
+            @else
+            <img src="{{ asset('storage/images/system/profile-picture-placeholder.png') }}" 
+            class="w-24 h-24 border-2 border-gray-300 shadow-xl/30 rounded-full aspect-square object-cover" 
+            alt="Placeholder profile picture">
+            @endif
         </div>
         <div class="flex flex-col justify-around text-center ml-2 @sm:mx-3 @sm:ml-auto">
             <h1 class="text-2xl @sm:text-3xl font-medium">{{$fName}} {{$lName}}</h1>

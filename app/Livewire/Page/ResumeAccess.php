@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Page;
 
+use App\Models\ResumeAccess as ModelsResumeAccess;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Locked;
@@ -14,9 +15,12 @@ class ResumeAccess extends Component
     #[Locked]
     public $authorized = false;
 
+    #[Locked]
+    public $userId = '';
+
     public function checkPassword() {
-        $password = env('RESUME_PASSWORD');
-        if (Hash::check($this->password, $password)) {
+        $key = ModelsResumeAccess::where('user_id', $this->userId)->sole()->access_key;
+        if (Hash::check($this->password, $key)) {
             $this->authorized = true;
             Cache::put('authorized_'.session()->getId(), true, now()->addMinutes(60));
             $this->dispatch('authorize');

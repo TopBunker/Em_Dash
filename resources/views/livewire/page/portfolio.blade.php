@@ -28,10 +28,10 @@
             @endif
         </div>
         @if ( !empty($portfolio['projects']) )
-        <div class="flex flex-col justify-between gap-y-5 mt-10">
+        <div class="flex flex-col justify-between gap-y-10 mt-10">
         @foreach ($portfolio['projects'] as $project)
         <div class="flex flex-col justify-between basis-auto">
-            <h3>{{ $project['title'] }}</h3>
+            <h2>{{ $project['title'] }}</h2>
             <p>{{ $project['details'] ? $project['details'] : '' }}</p>
             @if ($project['link'])
             <iframe
@@ -41,7 +41,7 @@
                 height="500"
                 sandbox>
                 <p class="my-4">
-                    <a href="{{ $project['link'] }}" rel="noopener noreferrer" target="_blank" class="link-nav">Fallbacklink for browsers that cannot display iframe.</a>
+                    <a href="{{ $project['link'] }}" rel="noopener noreferrer" target="_blank" class="link-nav underline">Fallback link for browsers that cannot display iframe.</a>
                 </p>
             </iframe>
             @endif
@@ -54,7 +54,7 @@
             <video controls ><source src="{{ asset('storage/'.$media['location']) }}" type="{{ $media['type'] }}"></video>
             @endif
             @if ( str_contains($media['type'],'link') )
-            <p class="my-4"><a href="{{ $media['location'] }}" rel="noopener noreferrer" target="_blank" class="link-nav">Project resources.</a></p>
+            <p class="my-4"><a href="{{ $media['location'] }}" rel="noopener noreferrer" target="_blank" class="link-nav underline">Project Resources</a></p>
             @endif
             @endforeach
             @endif

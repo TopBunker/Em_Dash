@@ -26,5 +26,20 @@
             </a>
         </div>
     </div>
-    <div class="text-center">&copy; {{date('Y')}} Em-Dash. All rights reserved.</div>
+    <div class="text-center text-xs mt-2">
+        <div class="sm:hidden">
+            &copy; {{date('Y')}} {{ config('app.name') }}. All rights reserved.<br>
+            <a href="{{ route('terms') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Terms of Use</a> &middot; 
+            <a href="{{ route('privacy') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Privacy Policy</a>     
+        </div>
+        <div class="hidden sm:inline-block">
+            &copy; {{date('Y')}} {{ config('app.name') }}. All rights reserved.
+            <a href="{{ route('terms') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Terms of Use</a> &middot; 
+            <a href="{{ route('privacy') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Privacy Policy</a>
+        </div>
+        <div class="mt-1 hidden sm:block">
+            Built with <a href="https://laravel.com" target="_blank" rel="noopener" class="underline hover:text-brand">Laravel</a> &amp; <a href="https://alpinejs.dev" target="_blank" rel="noopener" class="underline hover:text-brand">Alpine.js</a>.
+        </div>
+    
+    </div>
 </div>

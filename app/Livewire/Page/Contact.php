@@ -5,8 +5,10 @@ namespace App\Livewire\Page;
 use App\Models\Message;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
 use InvalidArgumentException;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -32,13 +34,27 @@ class Contact extends Component
     #[Validate(['uploads.*' => 'file|nullable|mimetypes:application/pdf,application/msword|mimes:pdf,doc,docx|extensions:pdf,doc,docx'])]
     public $uploads = [];
 
+    public string $fielder = ''; // Honeypot field for bot detection
+
     /**
      * Save message and send response.
      * @return RedirectResponse 
      * @throws InvalidArgumentException 
      * @throws ValidationException 
      */
-    public function send(): RedirectResponse {
+    public function send() {
+        if (!empty($this->fielder)) {
+            // Bot detected via honeypot field
+            return;
+        }
+
+        if (RateLimiter::tooManyAttempts('contact-form:'.$this->email, 3)) {
+            $this->addError('fielder', 'Too many attempts. Please wait a minute and try again.');
+            return;
+        }
+
+        RateLimiter::hit('contact-form:'.$this->email);
+
         $this->validate();
 
         try{ 
