@@ -3,7 +3,7 @@
     </div>
     <div class="relative basis-full flex pb-40 px-4 pt-8"> 
     @foreach ( $portfolios as $portfolio )
-    <section x-show="section === '{{ $portfolio['title'] }}' ? true : false" data-section="{{ $portfolio['title'] }}" class="flex flex-col justify-between gap-y-4" 
+    <section x-show="section === '{{ $portfolio['title'] }}' ? true : false" data-section="{{ $portfolio['title'] }}" class="flex flex-col justify-between gap-y-4"
         x-transition:enter="transition ease-out duration-700"
         x-transition:enter-start="opacity-0 scale-0"
         x-transition:enter-end="opacity-100 scale-100"
@@ -15,8 +15,8 @@
             <hr class="mb-4">
             <p id="description">{{ $portfolio['description'] }}</p>
             @if ( $portfolio['file_location'] !== null )
-            <p class="my-4"><a href="{{ asset('storage/'.$portfolio['file_location']) }}" rel="noopener noreferrer" target="_blank" class="link-nav underline" aria-label="Open portfolio file">Open Portfolio</a></p>
-            <p class="my-4"><a href="#" wire:click.prevent="download('{{ $portfolio['file_location'] }}')" class="link-nav underline" aria-label="Download portfolio">Download Portfolio</a></p>
+            <p class="my-4"><a href="{{ asset('storage/'.$portfolio['file_location']) }}" rel="noopener noreferrer" target="_blank" class="link-nav underline" aria-label="Open portfolio document">Open Portfolio</a></p>
+            <p class="my-4"><a href="#" wire:click.prevent="download('{{ $portfolio['file_location'] }}')" class="link-nav underline" aria-label="Download portfolio document">Download Portfolio</a></p>
             @session('error')
             <div class="alert alert-error" role="alert">
                     {{ $value }}
@@ -24,7 +24,7 @@
             @endsession
             @endif
             @if ( $portfolio['link'] !== null )
-            <p class="my-4"><a href="{{ $portfolio['link'] }}" rel="noopener noreferrer" target="_blank" class="link-nav underline" aria-label="Visit portfolio">Click to view portfolio.</a></p>
+            <p class="my-4"><a href="{{ $portfolio['link'] }}" rel="noopener noreferrer" target="_blank" class="link-nav underline" aria-label="Visit portfolio website">Visit Portfolio</a></p>
             @endif
         </div>
         @if ( !empty($portfolio['projects']) )
@@ -47,12 +47,23 @@
                 },
                 reposition() {
                     document.querySelector(`#projects`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    this.background();
+                },
+                background() {
+                    if($el.classList.contains(`from-cyan-500`)) {
+                        $el.classList.remove('from-cyan-500', 'to-indigo-500');
+                        $el.classList.add('from-indigo-500', 'to-cyan-500');
+                    } else {
+                        $el.classList.remove('from-indigo-500', 'to-cyan-500');
+                        $el.classList.add('from-cyan-500', 'to-indigo-500');
+                    }
                 }
             }" 
             data-items='@json($projectTitles)'
-            class="flex flex-col justify-between"
+            class="flex flex-col justify-between bg-linear-45 from-cyan-500 to-indigo-500"
             x-on:touchstart="startX = $event.touches[0].clientX"
-            x-on:touchend="endX = $event.changedTouches[0].clientX; handleSwipe()">
+            x-on:touchend="endX = $event.changedTouches[0].clientX; handleSwipe()"
+            x-transition>
             
             @foreach ($portfolio['projects'] as $project)
             <div id="{{ $project['title'] }}" x-show="project === '{{ $project['title'] }}'"

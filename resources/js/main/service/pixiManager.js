@@ -6,6 +6,9 @@ class PixiManager {
 
     constructor(canvas) {
         if (PixiManager.instance) return PixiManager.instance;
+        if (PixiManager.instance) {
+            PixiManager.instance.destroy();
+        }
         this.app = new Application();
         this.ready = this._init();
         this.dom = canvas;

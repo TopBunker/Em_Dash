@@ -191,6 +191,9 @@ $(async () => {
   });
 
   listener.add(document, 'portfolio:ready', async () => {
+    if (portfolio.children.length > 0) {
+      return;
+    }
     background.addChild(bgSprite);
     const links = document.querySelectorAll('#portfolio nav a');
 
@@ -496,11 +499,16 @@ $(async () => {
    */
 
   listener.add(document, 'contact:ready', () => {
+    if (background.children.length > 0) {
+      return;
+    }
     background.addChild(bgSprite);
   });
 
   listener.add(document, 'resume:ready', () => {
-    background.removeChild(bgSprite);
+    if (background.children.length > 0) {
+       background.removeChild(bgSprite);
+    }
   });
 
   // signal ready when page initializes

@@ -1,4 +1,4 @@
-<div id="app" x-data class="@container/main h-dvh grid grid-rows-[auto_1fr_auto]">
+<div id="app" x-data class="@container/main h-dvh w-dvw grid grid-rows-[auto_1fr_auto]">
     <!--Header-->
     <header class="relative bg-white/50 backdrop-blur-md shadow-md border-b border-black">
         <livewire:layouts.header :$userId />

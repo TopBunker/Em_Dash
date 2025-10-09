@@ -120,6 +120,9 @@ $(async () => {
     transitionState = nullState;
 
     document.addEventListener('portfolio:ready', async () => {
+        if (container.children.length > 0) {
+            return;
+        }
         build();
 
         const section = document.querySelector('#portfolio section[data-section=Writer]');
@@ -137,6 +140,9 @@ $(async () => {
         function setUp() {
             if (!set) {
                 if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
+                    if (container.children.length > 0) {
+                        container.removeChildren();
+                    }
                     blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
                     container.addChild(blocks);
                     scrollState = openState;
@@ -145,6 +151,9 @@ $(async () => {
                 } 
              } else {
                 if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
+                    if (container.children.length > 0) {
+                        container.removeChildren();
+                    }
                     blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
                     container.addChild(blocks);
                     scrollState = openState;
