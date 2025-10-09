@@ -2,7 +2,7 @@
 
 ### About Em-Dash
 
-Em-Dash is an ongoing project to develop a streamlined, easy-to-use platform for creators to showcase their work via customizable single-page apps. 
+Em-Dash is an ongoing project to develop a streamlined, easy-to-use platform for creators to showcase their work via customizable single-page app experiences. 
 
 The project began as a personal résumé and portfolio site, built with Laravel 12 (PHP), Livewire v3 (frontend-backend interactivity) and Alpine.js to demonstrate practical full-stack capabilities. 
 

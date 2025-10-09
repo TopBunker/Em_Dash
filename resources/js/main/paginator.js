@@ -17,9 +17,9 @@ $(async () => {
   const pixi = Alpine.store('app').pixi; 
   await pixi.ready;
 
-  await pixi.addChild(main);
-  await pixi.addChild(background);
-  await pixi.addChild(portfolio);
+  await pixi.addChildAt(background, 0);
+  await pixi.addChild(portfolio, 1);
+  await pixi.addChildAt(main, 2);
 
   const listener = Alpine.store('app').listeners;
 
@@ -44,15 +44,26 @@ $(async () => {
   });
 
   const headerBg = new Graphics();
-  headerBg.circle(window.innerWidth/2, window.innerHeight/2, window.innerWidth);
+  headerBg.circle(window.innerWidth/2, window.innerHeight/4.2, window.innerWidth);
   headerBg.fill({fill: radialGradient});
 
+  const hBg = new Graphics();
+  hBg.rect(0,0,window.innerWidth,window.innerHeight/4.2);
+  hBg.fill({color: '0xffffff'});
+
   const rt = pixi.app.renderer.textureGenerator.generateTexture(headerBg);
+  const hTex = pixi.app.renderer.textureGenerator.generateTexture(hBg);
 
   const headSprite = new Sprite(tex);
   headSprite.width = window.innerWidth;
   headSprite.height = window.innerHeight/4.2;
-  main.addChild(headSprite);
+
+  const headBack = new Sprite(hTex);
+  headBack.width = window.innerWidth;
+  listener.add(document.querySelector('header div'), 'getHeight', () => {
+  headBack.height = Alpine.store('app').headHeight;});
+
+  main.addChild(headSprite, headBack);
 
   const dispSprite = new Sprite(rt);
   dispSprite.width = window.innerWidth;

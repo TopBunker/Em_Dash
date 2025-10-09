@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\{Layout, Locked, On};
+use Livewire\Attributes\{Layout, Locked, On, Title};
 use Livewire\Component;
 
 #[Layout('components.layouts.guest')]
@@ -32,11 +32,12 @@ class Paginator extends Component
         
         $this->userId = $this->user->id;
 
-        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        // landing page determined by authorization (redundancy ensures that the initial component is always determined by authorization)
+        $authorized = session('authorized');
         if ($authorized) {
             $this->setComponent('resume');
-        }else{
-             $this->setComponent('resume-access');
+        } else {
+            $this->setComponent('resume-access');
         }
     }
 
@@ -48,15 +49,18 @@ class Paginator extends Component
     #[On('switchTo')]
     public function setComponent(string $active): void { 
         $component = '';
-        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        $authorized = session('authorized');
         if ($active === 'resume') {
             if ($authorized) {
                 $component = 'page.'.$active;
+                $this->updateTitle($active);
             }else{
                 $component = 'page.resume-access';
+                $this->updateTitle('');
             } 
         } else {
             $component = 'page.'.$active;
+            $this->updateTitle($active === 'resume-access' ? '' : $active);
         }
         $this->activeComponent = $component;
 
@@ -64,6 +68,12 @@ class Paginator extends Component
             $this->loadedComponents[] = $this->activeComponent;
         }
      }
+
+    public function updateTitle($active)
+    {
+        $title = ucwords(str_replace('page.', '', $active));
+        $this->dispatch('update-page-title', ['title' => $title]);
+    }
 
     #[On('authorize')]
     public function refresh(){

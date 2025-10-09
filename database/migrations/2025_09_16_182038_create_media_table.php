@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->morphs('mediaable');
             $table->string('location');
+            $table->string('thumb')->nullable();
+            $table->string('title')->nullable();
             $table->string('type');
             $table->timestamps();
         });

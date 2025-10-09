@@ -1,4 +1,4 @@
-<div x-data class="relative flex flex-col justify-between items-center px-4 pt-4">
+<div x-data class="relative flex flex-col justify-between items-center px-4 pt-4" x-on:getHeight.window="$store.app.headHeight = $el.offsetHeight" x-init="$dispatch('getHeight')">
     <!--Default Profile Header-->
     <div class="flex flex-row justify-around">
         <div class="shrink-0 sm:mx-3">
@@ -18,12 +18,12 @@
         </div>
     </div>
     <!--Contact Details-->
-    <div class="flex flex-col justify-around my-2">
+    <div id="contact-details" class="flex flex-col justify-around my-2">
         <!--Chevron Button-->
         @if ($authorized)
         <button id="links-toggle" 
             class="hover:text-accent-light transition mx-auto lg:hidden"
-            x-on:click="$store.app.toggleInfo()"
+            x-on:click="$store.app.toggleInfo(); $dispatch('getHeight');"
             :aria-expanded="$store.app.showInfo.toString()" aria-label="Toggle contact display for mobile">
             <svg id="chevron" width="16" height="16" fill="currentColor" 
                 class="w-4 h-4 transition-transform duration-500" viewBox="0 0 16 16"

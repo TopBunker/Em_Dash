@@ -27,8 +27,7 @@
         </div>
     </div>
     <div class="text-center text-xs mt-2">
-        <div class="sm:hidden">
-            &copy; {{date('Y')}} {{ config('app.name') }}. All rights reserved.<br>
+        <div class="sm:hidden mb-2">
             <a href="{{ route('terms') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Terms of Use</a> &middot; 
             <a href="{{ route('privacy') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Privacy Policy</a>     
         </div>
@@ -37,8 +36,8 @@
             <a href="{{ route('terms') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Terms of Use</a> &middot; 
             <a href="{{ route('privacy') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Privacy Policy</a>
         </div>
-        <div class="mt-1 hidden sm:block">
-            Built with <a href="https://laravel.com" target="_blank" rel="noopener" class="underline hover:text-brand">Laravel</a> &amp; <a href="https://alpinejs.dev" target="_blank" rel="noopener" class="underline hover:text-brand">Alpine.js</a>.
+        <div class="my-1 hidden sm:block">
+            Built with <a href="https://laravel.com" target="_blank" rel="noopener" class="underline hover:text-brand">Laravel/Livewire</a> &amp; <a href="https://alpinejs.dev" target="_blank" rel="noopener" class="underline hover:text-brand">Alpine.js</a>.
         </div>
     
     </div>

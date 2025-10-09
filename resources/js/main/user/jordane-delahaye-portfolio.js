@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container, Graphics } from "pixi.js";
 import { pixifyText, block} from "../tools/build.js";
 import { altGridify, altGridifyCenter, gridify, makeGrid } from "../tools/grid.js";
 
@@ -13,7 +13,7 @@ $(async () => {
     const pixi = Alpine.store('app').pixi;
     await pixi.ready;
 
-    await pixi.addChild(container);
+    await pixi.addChildAt(container, 1);
 
     const listener = Alpine.store('app').listeners;
 
@@ -136,14 +136,16 @@ $(async () => {
         let set = false;
         function setUp() {
             if (!set) {
-                if(section.getBoundingClientRect().height > 0){
+                if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
+                    blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
                     container.addChild(blocks);
                     scrollState = openState;
                     animationState = textAnimation;
                     set = true;
                 } 
              } else {
-                if(section.getBoundingClientRect().height > 0){
+                if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
+                    blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
                     container.addChild(blocks);
                     scrollState = openState;
                 } 

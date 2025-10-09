@@ -43,7 +43,6 @@ class PixiManager {
 
     async addChildAt(child, position) {
         const app = await this.ready;
-        console.log(app.stage.children.length, position);
         if(app.stage.children.length <= (position + 1)){
             app.stage.addChildAt(child, position);
         }else {

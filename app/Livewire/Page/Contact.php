@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use InvalidArgumentException;
 use Illuminate\Validation\ValidationException;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Throwable;
 
+#[Title('Contact')]
 class Contact extends Component
 {
     use WithFileUploads;

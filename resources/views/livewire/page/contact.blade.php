@@ -48,7 +48,8 @@
                     file:border-1 file:border-brand-dark file:text-xs file:font-medium 
                     file:bg-stone-50 file:text-brand-dark
                     hover:file:cursor-pointer hover:file:bg-brand-dark hover:file:text-white" 
-                    aria-describedby="file_input_help" id="file_input" type="file" multiple/>
+                    aria-describedby="file_input_help" id="file_input" type="file" 
+                    accept=".pdf,.doc,.docx" multiple/>
                 <p class="mt-1 text-sm text-brand-light" id="file_input_help">PDF, DOC, DOCX</p>
                 <div>@error('uploads.*') <span class="error">{{ $message }}</span> @enderror</div>
                 <!--Upload Progress Bar-->

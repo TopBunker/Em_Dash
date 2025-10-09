@@ -73,7 +73,7 @@ class Header extends Component
     
     public function render()
     {
-        $authorized = Cache::get('authorized_'.session()->getId(), false);
+        $authorized = session('authorized');
         return view('livewire.layouts.header', ['authorized' => $authorized]);
     }
 }

@@ -6,14 +6,7 @@ use App\Models\Experience;
 use App\Models\Portfolio;
 use App\Models\Resume;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection as SupportCollection;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
-use InvalidArgumentException;
-
-use function PHPUnit\Framework\isArray;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ResumeService
 {
@@ -141,7 +134,7 @@ class ResumeService
                         'projects' => function ($query){
                             $query->select('id','portfolio_id','title','details','link')
                             ->with([
-                            'projectMedia:id,mediaable_id,location,type',
+                            'projectMedia:id,mediaable_id,location,thumb,title,type',
                             ]);
                     }])->get()->toArray();
         $portfolio = ResumeService::scrubId($collection);

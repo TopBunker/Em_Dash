@@ -20,12 +20,17 @@ class ResumeAccess extends Component
 
     public function checkPassword() {
         $key = ModelsResumeAccess::where('user_id', $this->userId)->sole()->access_key;
-        if (Hash::check($this->password, $key)) {
-            $this->authorized = true;
-            Cache::put('authorized_'.session()->getId(), true, now()->addMinutes(60));
+        if ($this->authorized) {
+            session('authorized', true);
             $this->dispatch('authorize');
         } else {
-            return back()->with('error', 'Incorrect password.');
+            if (Hash::check($this->password, $key)) {
+                $this->authorized = true;
+                session()->put('authorized', true);
+                $this->dispatch('authorize');
+            } else {
+                return back()->with('error', 'Incorrect password.');
+            }
         }
     }
 

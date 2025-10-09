@@ -16,7 +16,6 @@ class Resume extends Component
     public $portfolio = [];
     public $skills = [];
     public $references = [];
-    public $file = '';
     public $hasSettings = true;
 
     public function mount(string $userId): void {
@@ -24,7 +23,7 @@ class Resume extends Component
         $this->background = $resume['background'];
         $this->experience = $resume['experience'];
         $this->skills = $resume['skills'];
-        $this->file = $resume['file'];
+        session()->put('resume_download', $resume['file']);
         if(count($resume['references']) > 0){
             $this->references = $resume['references'];
         }
@@ -50,22 +49,14 @@ class Resume extends Component
         }
         return false;
     }
-    
-    /**
-     * Trigger file download in browser
-     * @return BinaryFileResponse|RedirectResponse
-     */
-    public function download(): StreamedResponse|RedirectResponse {
-        if(Storage::disk('public')->exists($this->file)){
-            return Storage::disk('public')->download($this->file);
-        }else{
-            return back()->with('error', 'File not found.');
-        }  
-    }
 
     public function render()
     {
-        $authorized = Cache::get('authorized_'.session()->getId(), false);
-        return view('livewire.page.resume', ['authorized' => $authorized, 'background' => $this->background, 'experience' => $this->experience, 'portfolio' => $this->portfolio, 'skills' => $this->skills, 'references' => $this->references]);
+        $authorized = session('authorized');
+        if ($authorized) {
+            return view('livewire.page.resume', ['background' => $this->background, 'experience' => $this->experience, 'portfolio' => $this->portfolio, 'skills' => $this->skills, 'references' => $this->references]);
+        }else {
+            return view('livewire.page.resume-access');
+        }
     }
 }
