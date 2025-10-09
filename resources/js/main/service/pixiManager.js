@@ -6,7 +6,6 @@ class PixiManager {
 
     constructor(canvas) {
         if (PixiManager.instance) return PixiManager.instance;
-
         this.app = new Application();
         this.ready = this._init();
         this.dom = canvas;
@@ -74,6 +73,14 @@ class PixiManager {
     async render() {
         const app = await this.ready;
         app.renderer.render(app.stage);
+    }
+
+    destroy() {
+        if (this.app) {
+            this.app.destroy(true, {children: true});
+            this.app = null;
+            PixiManager.instance = null;
+        }
     }
 }
 
