@@ -1,4 +1,4 @@
-<div x-data="{menuOpen: false}" class="relative flex flex-col px-4 backdrop-blur-md" x-transition>
+<div id="footerBase" x-data="{menuOpen: false}" class="relative flex flex-col px-4 backdrop-blur-md" x-transition>
     <!-- Mobile Nav-->
     <div  class="@md:hidden flex flex-col py-2">
         <div id="mobile-menu" class="flex flex-col pb-2 origin-bottom" 
@@ -14,9 +14,9 @@
             <!--Menu button (mobile only)-->
             <button id="menu-btn" class="text-brand focus:outline-none" 
                     aria-label="Toggle display menu on mobile"
-                    x-on:click="menuOpen = !menuOpen"
+                    x-on:click.stop="menuOpen = !menuOpen"
                     :aria-expanded="menuOpen.toString()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-label="Open menu">
                     <path class="" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
@@ -26,7 +26,7 @@
             </a>
         </div>
     </div>
-    <div class="text-center text-xs mt-2">
+    <div class="text-center sm:flex flex-row justify-between text-xs mt-2">
         <div class="sm:hidden mb-2">
             <a href="{{ route('terms') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Terms of Use</a> &middot; 
             <a href="{{ route('privacy') }}" class="underline hover:text-brand" target="_blank" rel="noopener">Privacy Policy</a>     
@@ -42,3 +42,18 @@
     
     </div>
 </div>
+
+@script
+<script>
+    let btn = document.querySelector('#menu-btn');
+    let div = document.querySelector('#footerBase');
+    let btnIcon = document.querySelector('[aria-label="Open menu"]');
+    document.addEventListener('click', (e) => {
+        if (Alpine.$data(div).menuOpen) {
+            if (e.target !== btn && e.target !== btnIcon) {
+                Alpine.$data(div).menuOpen = false;
+            }
+        }
+    });
+</script>
+@endscript

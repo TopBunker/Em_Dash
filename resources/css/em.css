@@ -37,11 +37,11 @@
     }
 
     a[aria-current="true"] {
-        @apply scale-125 text-brand-light;
+        @apply scale-110 text-brand-light;
     }
 
     a[aria-current="page"] {
-        @apply scale-125 text-brand-light;
+        @apply scale-110 text-brand-light;
     }
 
     button {

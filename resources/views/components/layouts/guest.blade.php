@@ -6,11 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         {{-- Default Meta Description --}}
-        <meta name="description" content="@yield('meta_description', 'Em-Dash specializes in web development and content strategy. Collaborate with us to find the right solutions for your project needs.')">
+        <meta name="description" content="@yield('meta_description', 'Em-Dash specialises in web development and content strategy. Collaborate with us to find the right solutions for your project needs.')">
 
         {{-- Social Share --}}
         <meta property="og:title" content="@yield('meta_title', 'Em-Dash')">
-        <meta property="og:description" content="@yield('meta_description', 'Em-Dash specializes in web development and content strategy. Collaborate with us to find the right solutions for your project needs.')">
+        <meta property="og:description" content="@yield('meta_description', 'Em-Dash specialises in web development and content strategy. Collaborate with us to find the right solutions for your project needs.')">
         <meta property="og:image" content="@yield('meta_image', asset('images/system/logo.png'))">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="twitter:card" content="summary_large_image">
@@ -24,7 +24,7 @@
         <title>Welcome - {{ config('app.name', 'Em-Dash' ) }}</title>
 
         <!-- Styles and Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/js/app.js'])
     </head>
     <body class="font-poppins antialiased max-h-dvh max-w-dvw">
         <!-- Background Pixi Canvas-->

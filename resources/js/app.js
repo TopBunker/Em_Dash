@@ -1,4 +1,5 @@
 import './bootstrap';
+import '../css/app.css';
 
 // app scripts
 import './em.js';

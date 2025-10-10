@@ -32,8 +32,7 @@
         @php
             $projectTitles = array_map(fn($p) => $p['title'], $portfolio['projects']);
         @endphp
-        <div 
-            x-data="{
+        <div x-data="{
                 projects: JSON.parse($el.dataset.items),
                 projectIndex: 0,
                 startX: 0,
@@ -62,8 +61,7 @@
             data-items='@json($projectTitles)'
             class="flex flex-col justify-between bg-linear-45 from-cyan-500 to-indigo-500"
             x-on:touchstart="startX = $event.touches[0].clientX"
-            x-on:touchend="endX = $event.changedTouches[0].clientX; handleSwipe()"
-            x-transition>
+            x-on:touchend="endX = $event.changedTouches[0].clientX; handleSwipe()">
             
             @foreach ($portfolio['projects'] as $project)
             <div id="{{ $project['title'] }}" x-show="project === '{{ $project['title'] }}'"

@@ -32,6 +32,9 @@ $(async () => {
     let gridReference = makeGrid(ref,ref, 9, 9);
 
     function build() {
+        if (blocks.children.length > 0) {
+            blocks.removeChildren();
+        }
         // row 1
         blocks.addChild(block(gridReference, 0x000000, 4, 0).fill(0x000000));
         // row 2
@@ -120,9 +123,6 @@ $(async () => {
     transitionState = nullState;
 
     document.addEventListener('portfolio:ready', async () => {
-        if (container.children.length > 0) {
-            return;
-        }
         build();
 
         const section = document.querySelector('#portfolio section[data-section=Writer]');
@@ -136,29 +136,20 @@ $(async () => {
             mainContent.before(viewPane);
         }
 
-        let set = false;
+        let set = container.children.length ? true : false;
         function setUp() {
-            if (!set) {
                 if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
                     if (container.children.length > 0) {
                         container.removeChildren();
                     }
-                    blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
+                    blocks.pivot.set(blocks.width/2, 0);
+                    blocks.x = (mainContent.clientWidth / 2);
                     container.addChild(blocks);
                     scrollState = openState;
-                    animationState = textAnimation;
-                    set = true;
-                } 
-             } else {
-                if(section.getBoundingClientRect().height > 0 && viewPane.clientWidth > 0){
-                    if (container.children.length > 0) {
-                        container.removeChildren();
+                    if (!set) {
+                        animationState = textAnimation;
                     }
-                    blocks.x = (viewPane.clientWidth / 2) - (blocks.width / 2);
-                    container.addChild(blocks);
-                    scrollState = openState;
                 } 
-            }
         }
 
         const startSate = (delta) => {
@@ -208,11 +199,21 @@ $(async () => {
             if ((count % 2) === 0) {            
                 count = 0;
                 let l = alphabet[index];
-                pTitle[a].text = l;
+                
+                if (pTitle[a] === title[a]) {
+                    console.log('block: ', pTitle[a], ' base: ', title[a]);
+                    a++;
+                    index = 0;
+                    return;
+                } else {
+                    pTitle[a].text = l;
+                }
+
                 if (l === title[a]) {
                     a++;
                     index = 0;
-                }
+                } 
+                
                 index++;
             }
         }
